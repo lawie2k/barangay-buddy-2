@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Vina+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="landingPage.css" />
+    <title>Barangay buddy</title>
+  </head>
+
+  <body>
+    <!---------------------navbar-------------------->
+    <header class="navbar">
+      <div class="nav-logo">
+        <img class="nav-img" src="img/BarangayBuddy Logo 1.png" alt="" />
+      </div>
+      <button class="hamburger-menu">
+        <i class="fa fa-bars"></i>
+      </button>
+      <nav class="navbar-item">
+        <ul class="navbar-btn">
+          <li><a class="nav-btn" href="">Home</a></li>
+          <li><a class="nav-btn" href="">About Us</a></li>
+          <li><a class="nav-btn" href="">Services<i class="fa-solid fa-caret-down"></i></a>
+             <ul class="dropdown">
+              <li><a href="">Barangay Certification</a>
+                   <ul class="certification-dropdown">
+                   <li><a href="">4P's Validation</a></li>
+                   <li><a href="">Common Law</a></li>
+                   <li><a href="">Identification</a></li>
+                   <li><a href="">Loan</a></li>
+                   <li><a href="">Medical Assistance</a></li>
+                   <li><a href="">Previous Residency</a></li>
+                   <li><a href="">Other Purposes</a></li>
+                  </ul>
+              </li>
+              <li><a href="">Barangay Clearance</a>
+                <ul class="clearance-dropdown">
+                  <li><a href="">COMELEC</a></li>
+                  <li><a href="">Employment</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><a class="nav-btn" href="">Contact</a></li>
+          <li><a class="nav-btn" href="">FAQs</a></li>
+          <li><a class="nav-btn" href="login.html">Admin</a></li>
+        </ul>
+      </nav>
+    </header>
+    <!---------------------navbar end-------------------->
+    
+    <!---------------------sidebar-------------------->
+    <aside class="sidebar">
+      <button class="exit-btn"><i class="fa-solid fa-xmark" style="color: #1e38e9;"></i></button>
+      <nav class="sidebar-item">
+        <ul class="sidebar-btn">
+          <li><a href="">Home</a></li>
+          <li><a href="">About Us</a></li>
+          <li><a href="">Services</a></li>
+          <li><a href="">Contact</a></li>
+          <li><a href="">FAQs</a></li>
+          <li><a href="">Admin</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!---------------------hero-------------------->
+    <section class=" hero-container">
+      <div class="hero">
+        <div class="hero-text">
+          <h1>BARANGAY BUDDY</h1>
+          <p>SA PAGKUHA NG DOCUMENTO KAMI KA-BUDDY MO!</p>
+          <button>GET STARTED</button>
+        </div>
+        <div class="hero-img">
+          <img src="img/Untitled.png" alt="" />
+        </div>
+        </div>
+      </div>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 319"><path fill="#ffffff" fill-opacity="1" d="M0,224L48,202.7C96,181,192,139,288,144C384,149,480,203,576,197.3C672,192,768,128,864,85.3C960,43,1056,21,1152,10.7C1248,0,1344,0,1392,0L1440,0L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>
+    </section>
+    <!---------------------hero end-------------------->
+
+    <section>
+      <div class="sect2">
+        <div class="sect2-text">
+          <h2>Making Barangay Services Easier</h2>
+          <p>We believe accessing barangay documents should be simple,
+             fast, and stress-free — for everyone in the community.</p>
+             <button>LEARN MORE</button>
+        </div>
+        <div class="sect2-img">
+          <img src="img/section 2.png" alt="">
+        </div>
+      </div>
+    </section>
+  </body>
+  <script type="module" src="landingPage.js"></script>
+</html>
