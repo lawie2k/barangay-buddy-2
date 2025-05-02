@@ -44,7 +44,7 @@ i {
   font-size: 48px;
 }
 .username {
-  margin-top: 103px;
+  margin-top: 60px;
   width: 350px;
   display: flex;
   flex-direction: column;
@@ -55,6 +55,23 @@ i {
   font-weight: bold;
 }
 .username input {
+  height: 30px;
+  border-radius: 15px;
+  border: 0;
+  border-style: solid;
+}
+.barangay {
+  margin-top: 20px;
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+}
+.barangay label {
+  font-size: 16px;
+  font-weight: bold;
+}
+.barangay input {
   height: 30px;
   border-radius: 15px;
   border: 0;

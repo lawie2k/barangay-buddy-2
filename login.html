@@ -16,9 +16,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="login.css" />
     <title>Login</title>
-    <script type="module" src="login.js" defer></script>
   </head>
   <body>
+    <!---------------------sign up------------------>
+    <div class="admin-signup" style="display: none" id="signupform">
+      <button>
+        <i id="back-btn" class="fa-solid fa-arrow-left"></i>
+      </button>
+      <div class="signup-text">
+        <h1>Admin</h1>
+        <h2>create</h2>
+      </div>
+
+      <div class="username">
+        <label for="text">Email</label>
+        <input id="signup-email" type="email" />
+      </div>
+
+      <div class="barangay">
+        <label for="barangay">barangay</label>
+        <input id="signup-barangay" type="text" name="" />
+      </div>
+
+      <div class="password">
+        <label for="password">Password</label>
+        <input id="signup-password" type="password" name="" id="" />
+      </div>
+
+      <div class="signup-button">
+        <button id="create-button">Create</button>
+      </div>
+    </div>
+
+    <!------------------login--------------------->
     <div class="admin-login" id="loginform">
       <button>
         <a href="landingPage.html"><i class="fa-solid fa-arrow-left"></i></a>
@@ -26,24 +56,24 @@
       <div class="login-text">
         <h1>Admin</h1>
       </div>
-
       <div class="username">
-        <label id="email" for="text">Email</label>
-        <input type="text" />
+        <label for="text">Email</label>
+        <input id="email" type="text" />
       </div>
 
       <div class="password">
-        <label id="password" for="password">Password</label>
-        <input type="password" name="" id="" />
+        <label for="password">Password</label>
+        <input id="password" type="password" name="" id="" />
       </div>
 
       <div class="login-button">
-        <button id="login-button">Login</button>
+        <button id="login-btn">Login</button>
       </div>
 
       <div class="add-acc">
         <button id="add-acc">Add new Barangay</button>
       </div>
     </div>
+    <script type="module" src="login.js" defer></script>
   </body>
 </html>
