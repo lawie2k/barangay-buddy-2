@@ -36,6 +36,15 @@ document.addEventListener("DOMContentLoaded", () => {
       const inputs = document.querySelectorAll(".input");
       const email = document.querySelector(".input-email").value;
 
+      const selectedBarangay = inputs[3].value;
+
+      if (!selectedBarangay) {
+        alert("please select barangay");
+      }
+      if (!inputs[8].value) {
+        alert("Please select purpose");
+      }
+
       const data = {
         FormName: filename,
         firstName: inputs[0].value,
@@ -54,7 +63,10 @@ document.addEventListener("DOMContentLoaded", () => {
         timestamp: new Date(),
       };
       try {
-        await addDoc(collection(db, "formSubmissions"), data);
+        await addDoc(
+          collection(db, `formSubmissions/${selectedBarangay}/submissions`),
+          data
+        );
         alert("Form submitted successfully!");
       } catch (error) {
         console.error("error saving form", error);

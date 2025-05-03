@@ -175,6 +175,16 @@ ul li ul li:hover .clearance-dropdown {
 .sidebar.open {
   right: 0;
 }
+.sidebar li {
+  list-style: none;
+}
+.sidebar a {
+  color: black;
+  text-decoration: none;
+}
+.sidebar-btn a {
+  padding-bottom: 10px;
+}
 .side-dropdown {
   font-size: 12px;
   display: block;

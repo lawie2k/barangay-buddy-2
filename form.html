@@ -11,7 +11,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="navbar.css" />
-    <link rel="stylesheet" href="4ps-form.css" />
+    <link rel="stylesheet" href="forms.css" />
     <title>4ps form</title>
   </head>
   <body>
@@ -37,13 +37,13 @@
                   >Barangay Certification<i class="fa-solid fa-caret-down"></i
                 ></a>
                 <ul class="certification-dropdown">
-                  <li><a href="4ps-form.html">4P's Validation</a></li>
-                  <li><a href="">Common Law</a></li>
-                  <li><a href="">Identification</a></li>
-                  <li><a href="">Loan</a></li>
-                  <li><a href="">Medical Assistance</a></li>
-                  <li><a href="">Previous Residency</a></li>
-                  <li><a href="">Other Purposes</a></li>
+                  <li><a href="form.html">4P's Validation</a></li>
+                  <li><a href="form.html">Common Law</a></li>
+                  <li><a href="form.html">Identification</a></li>
+                  <li><a href="form.html">Loan</a></li>
+                  <li><a href="form.html">Medical Assistance</a></li>
+                  <li><a href="form.html">Previous Residency</a></li>
+                  <li><a href="form.html">Other Purposes</a></li>
                 </ul>
               </li>
               <li>
@@ -82,13 +82,13 @@
                   >Barangay Certification<i class="fa-solid fa-caret-down"></i
                 ></a>
                 <ul class="certification-sidedropdown">
-                  <li><a href="">4P's Validation</a></li>
-                  <li><a href="">Common Law</a></li>
-                  <li><a href="">Identification</a></li>
-                  <li><a href="">Loan</a></li>
-                  <li><a href="">Medical Assistance</a></li>
-                  <li><a href="">Previous Residency</a></li>
-                  <li><a href="">Other Purposes</a></li>
+                  <li><a href="form.html">4P's Validation</a></li>
+                  <li><a href="form.html">Common Law</a></li>
+                  <li><a href="form.html">Identification</a></li>
+                  <li><a href="form.html">Loan</a></li>
+                  <li><a href="form.html">Medical Assistance</a></li>
+                  <li><a href="form.html">Previous Residency</a></li>
+                  <li><a href="form.html">Other Purposes</a></li>
                 </ul>
               </li>
               <li>
@@ -113,8 +113,8 @@
 
     <section class="hero">
       <div class="hero-text">
-        <h2>Barangay Certification for</h2>
-        <h1>4P's Validation</h1>
+        <h2>Barangay Certification</h2>
+        <h1>Form</h1>
       </div>
     </section>
 
@@ -136,7 +136,13 @@
       <div class="form2">
         <div>
           <h2>Barangay *</h2>
-          <input class="input" type="text" required />
+          <select name="barangay" class="input">
+            <option value="">Select Barangay</option>
+            <option value="KingKing">KingKing</option>
+            <option value="Magnaga">Magnaga</option>
+            <option value="Fuentes">Fuentes</option>
+            <option value="Napnapan">Napnapan</option>
+          </select>
         </div>
         <div>
           <h2>Age *</h2>
@@ -158,7 +164,15 @@
         </div>
         <div>
           <h2>Purpose *</h2>
-          <input class="input" type="text" required />
+          <select name="Purpose" class="input">
+            <option value="">none</option>
+            <option value="4p's Validation">4ps Validation</option>
+            <option value="Common Law">Common Law</option>
+            <option value="Identification">Identification</option>
+            <option value="Loan">Loan</option>
+            <option value="Medical Assistance">Medical Assistance</option>
+            <option value="Previous Residency">Previous Residency</option>
+          </select>
         </div>
       </div>
       <div class="form4">
