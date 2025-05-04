@@ -1,17 +1,19 @@
 body {
-  background: #111e83;
-  background: linear-gradient(
-    90deg,
-    rgba(17, 30, 131, 1) 29%,
-    rgba(30, 54, 233, 1) 76%
-  );
+  margin: 0;
+  padding: 0;
   font-family: "Poppins";
+  overflow: hidden;
 }
+
 .admin-login {
-  max-width: 400px;
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 90%;
   height: 650px;
   background-color: white;
-  color: white;
+  color: black;
   margin: auto;
   margin-top: 120px;
   /* From https://css.glass */
@@ -25,6 +27,10 @@ body {
   -webkit-box-shadow: 6px 6px 16px -3px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 6px 6px 16px -3px rgba(0, 0, 0, 0.75);
 }
+.wave {
+  width: 100%;
+  margin-top: 400px;
+}
 .admin-login button {
   background-color: transparent;
   border: 0;
@@ -32,7 +38,7 @@ body {
   margin-top: 20px;
 }
 .admin-login a {
-  color: white;
+  color: black;
 }
 i {
   font-size: 24px;
@@ -57,7 +63,7 @@ i {
 .username input {
   height: 30px;
   border-radius: 15px;
-  border: 0;
+  border: 0=1;
   border-style: solid;
 }
 .barangay {
@@ -74,7 +80,7 @@ i {
 .barangay input {
   height: 30px;
   border-radius: 15px;
-  border: 0;
+  border: 1;
   border-style: solid;
 }
 .password {
@@ -91,7 +97,7 @@ i {
 .password input {
   height: 30px;
   border-radius: 15px;
-  border: 0;
+  border: 1;
   border-style: solid;
 }
 .login-button {
@@ -111,17 +117,21 @@ i {
 }
 
 .add-acc button {
-  color: white;
+  color: black;
   cursor: pointer;
 }
 .add-acc button:hover {
   color: #1e36e9;
 }
 .admin-signup {
-  max-width: 400px;
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 90%;
   height: 650px;
   background-color: white;
-  color: white;
+  color: black;
   margin: auto;
   margin-top: 120px;
   align-self: center;
@@ -143,7 +153,7 @@ i {
   margin-top: 20px;
 }
 .admin-signup i {
-  color: white;
+  color: black;
 }
 .signup-login button {
   background-color: transparent;
@@ -152,7 +162,7 @@ i {
   margin-top: 20px;
 }
 .signup-login a {
-  color: white;
+  color: black;
 }
 i {
   font-size: 24px;

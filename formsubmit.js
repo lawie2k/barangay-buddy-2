@@ -6,11 +6,7 @@ import {
   addDoc,
 } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
 // Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyCSys1qOfPXktRo1LyoZggtHZhj3b3GjDw",
   authDomain: "barangay-buddy.firebaseapp.com",
@@ -29,20 +25,21 @@ const db = getFirestore(app);
 const filename = window.location.pathname.split("/").pop().split(".")[0];
 
 document.addEventListener("DOMContentLoaded", () => {
-  const submitbutton = document.getElementById("submit-btn");
+  const submitButton = document.getElementById("submit-btn");
 
-  if (submitbutton) {
-    submitbutton.addEventListener("click", async () => {
+  if (submitButton) {
+    submitButton.addEventListener("click", async () => {
       const inputs = document.querySelectorAll(".input");
       const email = document.querySelector(".input-email").value;
-
       const selectedBarangay = inputs[3].value;
 
       if (!selectedBarangay) {
-        alert("please select barangay");
+        alert("Please select barangay");
+        return;
       }
       if (!inputs[8].value) {
         alert("Please select purpose");
+        return;
       }
 
       const data = {
@@ -50,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
         firstName: inputs[0].value,
         middleName: inputs[1].value,
         lastName: inputs[2].value,
-        barangay: inputs[3].value,
+        barangay: selectedBarangay,
         age: inputs[4].value,
         status: inputs[5].value,
         mobileNumber: inputs[6].value,
@@ -62,15 +59,17 @@ document.addEventListener("DOMContentLoaded", () => {
         email: email,
         timestamp: new Date(),
       };
+
       try {
+        // Save the form data to Firestore
         await addDoc(
           collection(db, `formSubmissions/${selectedBarangay}/submissions`),
           data
         );
         alert("Form submitted successfully!");
       } catch (error) {
-        console.error("error saving form", error);
-        alert("submission failed");
+        console.error("Error saving form", error);
+        alert("Submission failed");
       }
     });
   }
