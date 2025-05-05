@@ -5,6 +5,11 @@ import {
   collection,
   getDocs,
 } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+import {
+  getAuth,
+  onAuthStateChanged,
+  signOut,
+} from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
 
 // Your Firebase configuration
 const firebaseConfig = {
@@ -21,6 +26,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+const auth = getAuth();
 
 // The barangay name you're working with
 const barangay = "KingKing";
@@ -126,6 +132,20 @@ function sendEmail(email, name) {
       alert(`Failed to send email: ${JSON.stringify(error)}`);
     });
 }
+/*-----------------------------------------------------------------------------------------*/
+onAuthStateChanged(auth, (user) => {
+  if (!user) {
+    window.location.replace("login.html");
+  }
+});
+
+const logout = document.getElementById("logout");
+
+logout.addEventListener("click", function () {
+  signOut(auth);
+
+  window.location.href = "login.html";
+});
 
 /*--------------------------sidebar and content display-----------------------------------*/
 const buttons = document.querySelectorAll(".side-text button");
@@ -155,5 +175,53 @@ document.querySelectorAll(".admin-items > div").forEach((div) => {
     div.style.display = "flex";
   } else if (!div.classList.contains("sideMenu")) {
     div.style.display = "none";
+  }
+});
+/*----------------------------------------------------------------*/
+document.addEventListener("DOMContentLoaded", async () => {
+  const submissionContainers = document.querySelectorAll(".KingKingRecords");
+
+  submissionContainers.forEach((container) => {
+    container.innerHTML = "<p>Loading...</p>";
+  });
+
+  try {
+    const snapshot = await getDocs(
+      collection(db, `formSubmissions/${barangay}/submissions`)
+    );
+
+    if (snapshot.empty) {
+      submissionContainers.forEach((container) => {
+        container.innerHTML = "<p>No submissions found for KingKing.</p>";
+      });
+      return;
+    }
+
+    submissionContainers.forEach((container) => {
+      container.innerHTML = "";
+    });
+
+    snapshot.forEach((doc) => {
+      const data = doc.data();
+      const div = document.createElement("div");
+      div.style.border = "1px solid #ccc";
+      div.style.padding = "10px";
+      div.style.margin = "10px 0";
+      div.innerHTML = `
+        <strong>${data.firstName} ${data.lastName}</strong><br>
+        Age: ${data.age}<br>
+        Email: ${data.email}<br>
+      `;
+
+      // Append the new div element to all submission containers
+      submissionContainers.forEach((container) => {
+        container.appendChild(div.cloneNode(true));
+      });
+    });
+  } catch (error) {
+    console.error("Error loading submissions:", error);
+    submissionContainers.forEach((container) => {
+      container.innerHTML = "<p>Failed to load submissions.</p>";
+    });
   }
 });
