@@ -78,10 +78,16 @@ freedomWallForm.addEventListener("submit", async (e) => {
 // Function to render the post in the container
 function renderPost(text) {
   const postDiv = document.createElement("div");
-  postDiv.classList.add("post-box"); // Add a custom class for styling
+  postDiv.classList.add("post-box");
+
+  const userName = document.createElement("h4");
+  userName.textContent = "Anonymous";
+  userName.classList.add("post-username");
+
   const postText = document.createElement("p");
   postText.textContent = text;
 
+  postDiv.appendChild(userName);
   postDiv.appendChild(postText);
   freedomWallContainer.appendChild(postDiv);
 }

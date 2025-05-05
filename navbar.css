@@ -160,6 +160,45 @@ ul li ul li:hover .certification-dropdown {
 ul li ul li:hover .clearance-dropdown {
   display: block;
 }
+.brgy-officials {
+  font-size: 12px;
+  padding-left: 10px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  width: 200px;
+  display: none;
+  background-color: white;
+  z-index: 2;
+  position: absolute;
+  box-shadow: 5px 5px 19px -5px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 5px 5px 19px -5px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 5px 5px 19px -5px rgba(0, 0, 0, 0.75);
+}
+
+.brgy-officials li {
+  width: 180px;
+  list-style: none;
+}
+
+.brgy-officials i {
+  padding-left: 5px;
+}
+
+ul li:hover .brgy-officials {
+  display: block;
+  transition: 1s ease-out;
+}
+
+.brgy-officials a {
+  text-decoration: none;
+  color: black;
+  display: block;
+  padding: 5px 10px;
+}
+
+.brgy-officials a:hover {
+  color: #1e36e9;
+}
 /*---------------sidebar---------------*/
 .sidebar {
   position: fixed;

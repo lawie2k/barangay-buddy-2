@@ -3,7 +3,11 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebas
 import {
   getFirestore,
   collection,
+  addDoc,
   getDocs,
+  onSnapshot,
+  query,
+  orderBy,
 } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 import {
   getAuth,
@@ -224,4 +228,42 @@ document.addEventListener("DOMContentLoaded", async () => {
       container.innerHTML = "<p>Failed to load submissions.</p>";
     });
   }
+});
+/*-------------------------------------------------------------------*/
+// DOM elements to display posts (using querySelectorAll for class)
+const freedomWallContainers = document.querySelectorAll(
+  ".freedomWallContainer"
+);
+
+// Render a single post
+function renderPost(container, text) {
+  const postDiv = document.createElement("div");
+  postDiv.classList.add("post-box");
+
+  const userName = document.createElement("h4");
+  userName.textContent = "Anonymous";
+  userName.classList.add("post-username");
+
+  const postText = document.createElement("p");
+  postText.textContent = text;
+
+  postDiv.appendChild(userName);
+  postDiv.appendChild(postText);
+  container.appendChild(postDiv);
+}
+
+// Real-time updates from Firestore
+const postsQuery = query(
+  collection(db, "freedomWallPosts"),
+  orderBy("timestamp", "desc")
+);
+
+onSnapshot(postsQuery, (snapshot) => {
+  // Loop through all the containers and update each one with posts
+  freedomWallContainers.forEach((container) => {
+    container.innerHTML = ""; // Clear container
+    snapshot.forEach((doc) => {
+      renderPost(container, doc.data().text);
+    });
+  });
 });

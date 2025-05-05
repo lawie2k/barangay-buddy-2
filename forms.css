@@ -11,11 +11,7 @@ body {
   height: 340px;
   color: white;
   background: #111e83;
-  background: linear-gradient(
-    90deg,
-    rgba(17, 30, 131, 1) 29%,
-    rgba(30, 54, 233, 1) 76%
-  );
+  background: #6ec207;
 }
 .hero-text {
   justify-self: center;
@@ -31,7 +27,6 @@ body {
 .form-box {
   width: 1500px;
   height: 785px;
-  background-color: beige;
   justify-self: center;
 }
 .input {
@@ -69,7 +64,7 @@ body {
   margin-top: 20px;
 }
 .submit-btn button {
-  background-color: #1e36e9;
+  background-color: #4379f2;
   color: white;
   font-size: 16px;
   font-weight: bold;
