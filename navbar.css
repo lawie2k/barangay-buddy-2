@@ -53,8 +53,8 @@
 .nav-btn a:hover,
 .nav-btn a:active,
 .nav-btn:active {
-  color: #1e36e9;
-  border-bottom: 3px solid #1e36e9;
+  color: #4379f2;
+  border-bottom: 3px solid #4379f2;
   text-shadow: none;
   transform: scale(1.05);
 }
@@ -160,6 +160,9 @@ ul li ul li:hover .certification-dropdown {
 ul li ul li:hover .clearance-dropdown {
   display: block;
 }
+.officials-dropdown {
+  list-style: none;
+}
 .brgy-officials {
   font-size: 12px;
   padding-left: 10px;
@@ -174,7 +177,6 @@ ul li ul li:hover .clearance-dropdown {
   -webkit-box-shadow: 5px 5px 19px -5px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 5px 5px 19px -5px rgba(0, 0, 0, 0.75);
 }
-
 .brgy-officials li {
   width: 180px;
   list-style: none;

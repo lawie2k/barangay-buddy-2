@@ -10,12 +10,13 @@
     />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="events.css" />
     <link rel="stylesheet" href="navbar.css" />
-    <link rel="stylesheet" href="forms.css" />
-    <title>4ps form</title>
+    <link rel="stylesheet" href="landingPage.css" />
+    <script type="module" src="events.js"></script>
   </head>
   <body>
-    <!---------------------navbar-------------------->
     <header class="navbar">
       <div class="nav-logo">
         <img class="nav-img" src="img/BarangayBuddy Logo 1.png" alt="" />
@@ -74,6 +75,8 @@
         </ul>
       </nav>
     </header>
+    <!---------------------navbar end-------------------->
+
     <!---------------------sidebar-------------------->
     <aside class="sidebar">
       <button class="exit-btn">
@@ -85,9 +88,8 @@
           <li><a href="">About Us</a></li>
           <li>
             <a class="side-btn" href=""
-              >Services
-              <i class="fa-solid fa-caret-down"></i>
-            </a>
+              >Services<i class="fa-solid fa-caret-down"></i
+            ></a>
             <ul class="side-dropdown">
               <li>
                 <a href=""
@@ -114,112 +116,26 @@
               </li>
             </ul>
           </li>
-          <ul class="officials-dropdown">
-            <li>
-              <a class="nav-btn" href=""
-                >Brgy. Officials <i class="fa-solid fa-caret-down"></i
-              ></a>
-              <ul class="brgy-officials">
-                <li><a href="">brgy. kingking</a></li>
-                <li><a href="">brgy. magnaga</a></li>
-                <li><a href="">brgy. napnapan</a></li>
-              </ul>
-            </li>
-          </ul>
+          <li>
+            <a href=""
+              >Brgy. Officials <i class="fa-solid fa-caret-down"></i
+            ></a>
+            <ul>
+              <li><a href="">brgy. kingking</a></li>
+              <li><a href="">brgy. magnaga</a></li>
+              <li><a href="">brgy. napnapan</a></li>
+            </ul>
+          </li>
           <li><a href="events.html">Events</a></li>
           <li><a href="login.html">Admin</a></li>
         </ul>
       </nav>
     </aside>
-
-    <!---------------------navbar end-------------------->
-
-    <section class="hero">
-      <div class="hero-text">
-        <h2>Barangay Certification</h2>
-        <h1>Form</h1>
-      </div>
-    </section>
-
-    <section class="form-box">
-      <div class="form1">
-        <div>
-          <h2>First Name *</h2>
-          <input class="input" type="text" required />
-        </div>
-        <div>
-          <h2>Middle Name *</h2>
-          <input class="input" type="text" required />
-        </div>
-        <div>
-          <h2>Last Name *</h2>
-          <input class="input" type="text" required />
-        </div>
-      </div>
-      <div class="form2">
-        <div>
-          <h2>Barangay *</h2>
-          <select name="barangay" class="input">
-            <option value="">Select Barangay</option>
-            <option value="KingKing">KingKing</option>
-            <option value="Magnaga">Magnaga</option>
-            <option value="Napnapan">Napnapan</option>
-          </select>
-        </div>
-        <div>
-          <h2>Age *</h2>
-          <input class="input" type="text" required />
-        </div>
-        <div>
-          <h2>Status *</h2>
-          <input class="input" type="text" required />
-        </div>
-      </div>
-      <div class="form3">
-        <div>
-          <h2>Mobile Number *</h2>
-          <input class="input" type="text" required />
-        </div>
-        <div>
-          <h2>Years of Stay *</h2>
-          <input class="input" type="text" required />
-        </div>
-        <div>
-          <h2>Purpose *</h2>
-          <select name="Purpose" class="input">
-            <option value="">none</option>
-            <option value="4p's Validation">4ps Validation</option>
-            <option value="Common Law">Common Law</option>
-            <option value="Identification">Identification</option>
-            <option value="Loan">Loan</option>
-            <option value="Medical Assistance">Medical Assistance</option>
-            <option value="Previous Residency">Previous Residency</option>
-          </select>
-        </div>
-      </div>
-      <div class="form4">
-        <div>
-          <h2>Name of Student/patient *</h2>
-          <input class="input" type="text" required />
-        </div>
-        <div>
-          <h2>Address *</h2>
-          <input class="input" type="text" required />
-        </div>
-        <div>
-          <h2>Relationship</h2>
-          <input class="input" type="text" required />
-        </div>
-      </div>
-      <div class="email-form">
-        <h2>Email</h2>
-        <input class="input-email" type="email" required />
-      </div>
-      <div class="submit-btn">
-        <button id="submit-btn">Submit</button>
-      </div>
-    </section>
-    <script type="module" src="formsubmit.js"></script>
-    <script src="landingPage.js"></script>
+    <div class="event-hero">
+      <h1>Brgy.Events</h1>
+    </div>
+    <div class="event-container">
+      <div class="event-section-box"></div>
+    </div>
   </body>
 </html>

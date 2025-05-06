@@ -15,7 +15,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Kingking Admin Dashboard</title>
-    <link rel="stylesheet" href="barangay-kingking-admin.css" />
+    <link rel="stylesheet" href="admin.css" />
     <script type="module" src="kingking-admin.js"></script>
   </head>
   <body>
@@ -132,7 +132,21 @@
         <div class="freedom-wall-section-text"><h2>Freedom Wall</h2></div>
         <div class="freedomWallContainer">loading....</div>
       </div>
-      <div class="events-section">...</div>
+      <div class="events-section">
+        <div class="events-section-text"><h2>Events Posting</h2></div>
+        <div class="events-section-box">
+          <div class="events-section-items">
+            <div class="text-area-buttons">
+              <input type="file" id="eventsImage" accept="image/*" />
+              <button id="submitEventsPost">Post</button>
+            </div>
+            <div class="text-area">
+              <textarea id="text-area" placeholder="Write your message..."></textarea>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <script type="module" src="barangay-kingking.js"></script>
     <script

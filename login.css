@@ -113,7 +113,14 @@ i {
   border-radius: 15px;
   margin-right: 22px;
   border: 0;
-  background-color: #1e36e9;
+  background-color: #ffeb00;
+  color: #6ec207;
+}
+.login-button button:hover {
+  background-color: #6ec207;
+  color: #ffeb00;
+  transition: 0.3s;
+  cursor: pointer;
 }
 
 .add-acc button {
@@ -121,7 +128,7 @@ i {
   cursor: pointer;
 }
 .add-acc button:hover {
-  color: #1e36e9;
+  color: #4379f2;
 }
 .admin-signup {
   position: absolute;

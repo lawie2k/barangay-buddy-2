@@ -3,12 +3,18 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebas
 import {
   getFirestore,
   collection,
-  addDoc,
   getDocs,
+  addDoc,
   onSnapshot,
   query,
   orderBy,
 } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+import {
+  getStorage,
+  ref,
+  uploadBytes,
+  getDownloadURL,
+} from "https://www.gstatic.com/firebasejs/11.6.1/firebase-storage.js";
 import {
   getAuth,
   onAuthStateChanged,
@@ -31,6 +37,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth();
+const storage = getStorage(app);
 
 // The barangay name you're working with
 const barangay = "KingKing";
@@ -266,4 +273,50 @@ onSnapshot(postsQuery, (snapshot) => {
       renderPost(container, doc.data().text);
     });
   });
+});
+/*-----------------------------------------------------------*/
+// DOM elements for event posting
+const submitEventButton = document.getElementById("submitEventsPost");
+const eventTextArea = document.getElementById("text-area"); // Make sure this matches your HTML
+const eventImageInput = document.getElementById("eventsImage");
+
+submitEventButton.addEventListener("click", async () => {
+  const eventText = eventTextArea.value.trim();
+  const eventImageFile = eventImageInput.files[0];
+
+  // Ensure at least text or an image is provided
+  if (!eventText && !eventImageFile) {
+    alert("Please add either a description or an image for the event.");
+    return;
+  }
+
+  try {
+    let imageBase64 = null;
+
+    // Convert the image file to base64 if one is selected
+    if (eventImageFile) {
+      imageBase64 = await new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = reject;
+        reader.readAsDataURL(eventImageFile);
+      });
+    }
+
+    // Save to Firestore
+    await addDoc(collection(db, "eventsPosts"), {
+      text: eventText,
+      imageBase64: imageBase64 || null,
+      timestamp: new Date(),
+    });
+
+    // Reset form
+    eventTextArea.value = "";
+    eventImageInput.value = "";
+
+    alert("Event posted successfully!");
+  } catch (error) {
+    console.error("Error posting event:", error);
+    alert("Failed to post the event.");
+  }
 });

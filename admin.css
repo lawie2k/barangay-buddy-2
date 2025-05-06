@@ -256,3 +256,45 @@
   display: flex;
   flex-wrap: wrap;
 }
+.events-section {
+  width: 1350px;
+  height: 790px;
+  border: 1px solid;
+  border-radius: 15px;
+}
+.events-section-text {
+  width: 350px;
+  padding: 1px;
+  background-color: #6ec207;
+  color: white;
+  text-align: center;
+  justify-self: center;
+  border-radius: 50px;
+  margin-top: 20px;
+}
+.events-section-box {
+  width: 1300px;
+  height: 645px;
+  border: 1px solid;
+  border-radius: 10px;
+  justify-self: center;
+  margin-top: 30px;
+}
+.events-section-items {
+  margin-top: 120px;
+  width: 1240px;
+  justify-self: center;
+}
+.text-area-buttons {
+  display: flex;
+  gap: 913px;
+}
+.text-area {
+  justify-self: center;
+  margin-top: 50px;
+}
+.text-area textarea {
+  width: 1240px;
+  height: 320px;
+  border-radius: 10px;
+}

@@ -1,0 +1,72 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+import {
+  getFirestore,
+  collection,
+  query,
+  orderBy,
+  onSnapshot,
+} from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCSys1qOfPXktRo1LyoZggtHZhj3b3GjDw",
+  authDomain: "barangay-buddy.firebaseapp.com",
+  projectId: "barangay-buddy",
+  storageBucket: "barangay-buddy.appspot.com",
+  messagingSenderId: "390005278798",
+  appId: "1:390005278798:web:92c084dce55ba9fa3ddb1f",
+  measurementId: "G-D8P70Y4RJ3",
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+// Function to render each event post
+function renderEventPost(container, text, imageBase64) {
+  const postDiv = document.createElement("div");
+  postDiv.classList.add("post-box");
+
+  postDiv.style.width = "90%";
+  postDiv.style.height = "auto";
+  postDiv.style.display = "flex";
+
+  // Add image if available
+  if (imageBase64) {
+    const img = document.createElement("img");
+    img.src = imageBase64;
+    img.style.maxWidth = "20%";
+    img.style.marginBottom = "10px";
+    img.alt = "Event Image";
+    postDiv.appendChild(img);
+  }
+
+  // Add text
+  if (text) {
+    const postText = document.createElement("p");
+    postText.textContent = text;
+    postDiv.appendChild(postText);
+  }
+
+  container.appendChild(postDiv);
+}
+
+// Load and render event posts
+document.addEventListener("DOMContentLoaded", () => {
+  const eventSections = document.querySelectorAll(".event-section-box");
+
+  if (eventSections.length > 0) {
+    const postsQuery = query(
+      collection(db, "eventsPosts"),
+      orderBy("timestamp", "desc")
+    );
+
+    onSnapshot(postsQuery, (snapshot) => {
+      eventSections.forEach((container) => {
+        container.innerHTML = ""; // Clear previous posts
+        snapshot.forEach((doc) => {
+          const data = doc.data();
+          renderEventPost(container, data.text, data.imageBase64);
+        });
+      });
+    });
+  }
+});
