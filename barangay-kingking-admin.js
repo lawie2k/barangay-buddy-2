@@ -9,7 +9,7 @@ import {
   query,
   orderBy,
   deleteDoc,
-  doc
+  doc,
 } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 import {
   getStorage,
@@ -41,19 +41,153 @@ const db = getFirestore(app);
 const auth = getAuth();
 const storage = getStorage(app);
 
-// The barangay name you're working with
 const barangay = "KingKing";
 
-document.addEventListener("DOMContentLoaded", async () => {
-  const submissionContainers = document.querySelectorAll(".submissions"); // Handles both dashboard and request section
-  const sectionContainers = document.querySelectorAll(".request-submissions"); // For request message section
+function renderEventPost(
+  container,
+  text,
+  imageBase64,
+  barangay,
+  timestamp,
+  docId
+) {
+  const postDiv = document.createElement("div");
+  postDiv.classList.add("post-box");
+  postDiv.style.width = "90%";
+  postDiv.style.height = "auto";
+  postDiv.style.display = "flex";
+  postDiv.style.flexDirection = "column";
+  postDiv.style.fontSize = "14px";
+  postDiv.style.gap = "10px";
+  postDiv.style.padding = "15px";
+  postDiv.style.paddingBottom = "50px";
+  postDiv.style.backgroundColor = "#fff";
+  postDiv.style.borderRadius = "8px";
+  postDiv.style.boxShadow = "0 2px 4px rgba(0,0,0,0.1)";
+  postDiv.style.position = "relative";
 
-  // Display loading message initially
+  const headerDiv = document.createElement("div");
+  headerDiv.style.display = "flex";
+  headerDiv.style.justifyContent = "space-between";
+  headerDiv.style.alignItems = "center";
+  headerDiv.style.marginBottom = "10px";
+  headerDiv.style.borderBottom = "1px solid #eee";
+  headerDiv.style.paddingBottom = "5px";
+
+  const barangayText = document.createElement("span");
+  barangayText.textContent = `Posted by: ${barangay}`;
+  barangayText.style.fontWeight = "bold";
+  barangayText.style.color = "#6ec207";
+
+  const dateText = document.createElement("span");
+  dateText.textContent = new Date(timestamp.seconds * 1000).toLocaleString();
+  dateText.style.color = "#666";
+  dateText.style.fontSize = "12px";
+
+  headerDiv.appendChild(barangayText);
+  headerDiv.appendChild(dateText);
+  postDiv.appendChild(headerDiv);
+
+  const contentDiv = document.createElement("div");
+  contentDiv.style.display = "flex";
+  contentDiv.style.gap = "15px";
+  contentDiv.style.alignItems = "flex-start";
+  contentDiv.style.marginBottom = "10px";
+
+  if (imageBase64) {
+    const img = document.createElement("img");
+    img.src = imageBase64;
+    img.style.maxWidth = "30%";
+    img.style.borderRadius = "4px";
+    img.alt = "Event Image";
+    contentDiv.appendChild(img);
+  }
+
+  if (text) {
+    const postText = document.createElement("p");
+    postText.textContent = text;
+    postText.style.margin = "0";
+    postText.style.color = "#333";
+    contentDiv.appendChild(postText);
+  }
+
+  postDiv.appendChild(contentDiv);
+
+  const deleteButton = document.createElement("button");
+  deleteButton.textContent = "Delete";
+  deleteButton.classList.add("delete-button");
+  deleteButton.style.backgroundColor = "#ff4444";
+  deleteButton.style.color = "white";
+  deleteButton.style.border = "none";
+  deleteButton.style.padding = "8px 15px";
+  deleteButton.style.borderRadius = "4px";
+  deleteButton.style.cursor = "pointer";
+  deleteButton.style.position = "absolute";
+  deleteButton.style.bottom = "15px";
+  deleteButton.style.right = "15px";
+  deleteButton.style.fontSize = "14px";
+  deleteButton.style.transition = "background-color 0.3s";
+
+  deleteButton.addEventListener("mouseover", () => {
+    deleteButton.style.backgroundColor = "#ff0000";
+  });
+
+  deleteButton.addEventListener("mouseout", () => {
+    deleteButton.style.backgroundColor = "#ff4444";
+  });
+
+  deleteButton.addEventListener("click", async () => {
+    if (confirm("Are you sure you want to delete this event post?")) {
+      try {
+        await deleteDoc(doc(db, "eventsPosts", docId));
+      } catch (error) {
+        console.error("Error deleting event post: ", error);
+        alert("Failed to delete event post. Please try again.");
+      }
+    }
+  });
+
+  postDiv.appendChild(deleteButton);
+  container.appendChild(postDiv);
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const eventSections = document.querySelectorAll(".event-section-box");
+
+  if (eventSections.length > 0) {
+    const postsQuery = query(
+      collection(db, "eventsPosts"),
+      orderBy("timestamp", "desc")
+    );
+
+    onSnapshot(postsQuery, (snapshot) => {
+      eventSections.forEach((container) => {
+        container.innerHTML = "";
+        snapshot.forEach((doc) => {
+          const data = doc.data();
+          renderEventPost(
+            container,
+            data.text,
+            data.imageBase64,
+            data.barangay,
+            data.timestamp,
+            doc.id
+          );
+        });
+      });
+    });
+  }
+});
+
+document.addEventListener("DOMContentLoaded", async () => {
+  const submissionContainers = document.querySelectorAll(".submissions");
+  const sectionContainers = document.querySelectorAll(".request-submissions");
+
   submissionContainers.forEach((container) => {
     container.innerHTML = "<p>Loading...</p>";
   });
   sectionContainers.forEach((container) => {
-    container.innerHTML = "<p>Loading...</p>"; // Same for the section containers
+    container.innerHTML = "<p>Loading...</p>";
   });
 
   try {
@@ -71,12 +205,11 @@ document.addEventListener("DOMContentLoaded", async () => {
       return;
     }
 
-    // Clear out previous content if any in the dashboard and section containers
     submissionContainers.forEach((container) => {
-      container.innerHTML = ""; // Clear any existing content
+      container.innerHTML = "";
     });
     sectionContainers.forEach((container) => {
-      container.innerHTML = ""; // Clear any existing content
+      container.innerHTML = "";
     });
 
     snapshot.forEach((doc) => {
@@ -103,48 +236,32 @@ document.addEventListener("DOMContentLoaded", async () => {
         }; color: green; font-weight: bold;">✔ Email Sent</span>
       `;
 
-      // Append the new div element to the dashboard container (only once)
       submissionContainers.forEach((container) => {
-        container.appendChild(div.cloneNode(true)); // Clone and append div once per container
+        container.appendChild(div.cloneNode(true));
       });
 
-      // Append the new div element to the request message section (only once)
       sectionContainers.forEach((container) => {
-        container.appendChild(div.cloneNode(true)); // Clone and append div once per section container
+        container.appendChild(div.cloneNode(true));
       });
     });
 
-    // Now that the elements are added to the DOM, attach the event listeners
     const acceptButtons = document.querySelectorAll(".accept-btn");
-
     acceptButtons.forEach((btn) => {
       const email = btn.getAttribute("data-email");
       const emailSent = localStorage.getItem(`emailSent-${email}`) === "true";
 
-      // If the email has already been sent, disable the button and show the message
       if (emailSent) {
         btn.disabled = true;
-        btn.textContent = "Email Sent"; // Mark as sent
-        btn.nextElementSibling.style.display = "inline"; // Show the "sent" message
+        btn.textContent = "Email Sent";
+        btn.nextElementSibling.style.display = "inline";
       }
 
-      // Button click event listener
       btn.addEventListener("click", () => {
         const name = btn.getAttribute("data-name");
-
-        // Debugging: Let's log the email and name to see if they're being passed correctly
-        console.log(`Email: ${email}, Name: ${name}`);
-
-        // ✅ Save status in localStorage (so that it persists across page reload)
         localStorage.setItem(`emailSent-${email}`, "true");
-
-        // Send email when the admin clicks the button
         sendEmail(email, name);
-
-        // Disable the button and update its text
         btn.disabled = true;
-        btn.textContent = "Email Sent"; // Mark as sent
-        // Show the "sent" message next to the button
+        btn.textContent = "Email Sent";
         btn.nextElementSibling.style.display = "inline";
       });
     });
@@ -159,7 +276,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 });
 
-/*-----------------------------------------------------------------------------------------*/
 onAuthStateChanged(auth, (user) => {
   if (!user) {
     window.location.replace("login.html");
@@ -167,35 +283,41 @@ onAuthStateChanged(auth, (user) => {
 });
 
 const logout = document.getElementById("logout");
+if (logout) {
+  logout.addEventListener("click", function () {
+    signOut(auth);
+    window.location.href = "login.html";
+  });
+}
 
-logout.addEventListener("click", function () {
-  signOut(auth);
-  window.location.href = "login.html";
-});
-
-/*--------------------------sidebar and content display-----------------------------------*/
 const buttons = document.querySelectorAll(".side-text button");
 const sections = document.querySelectorAll(".admin-items > div:not(.sideMenu)");
 
 buttons.forEach((button) => {
   button.addEventListener("click", () => {
     const targetClass = button.getAttribute("data-target");
-
     sections.forEach((section) => {
       section.style.display = "none";
     });
-
     const targetSection = document.querySelector(`.${targetClass}`);
     if (targetSection) {
-      if (targetClass === "dashboard") {
-        targetSection.style.display = "flex";
-      } else {
-        targetSection.style.display = "block";
-      }
+      targetSection.style.display =
+        targetClass === "dashboard" ? "flex" : "block";
     }
   });
 });
 
+document.querySelectorAll(".admin-items > div").forEach((div) => {
+  if (div.classList.contains("dashboard")) {
+    div.style.display = "flex";
+  } else if (!div.classList.contains("sideMenu")) {
+    div.style.display = "none";
+  }
+});
+
+/*-----------------------------------------------------------------------------------------*/
+/*--------------------------sidebar and content display-----------------------------------*/
+/*----------------------------------------------------------------*/
 document.querySelectorAll(".admin-items > div").forEach((div) => {
   if (div.classList.contains("dashboard")) {
     div.style.display = "flex";
@@ -240,7 +362,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         Email: ${data.email}<br>
       `;
 
-      // Append the new div element to all submission containers
       submissionContainers.forEach((container) => {
         container.appendChild(div.cloneNode(true));
       });
@@ -254,17 +375,16 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 /*-------------------------------------------------------------------*/
-// DOM elements to display posts (using querySelectorAll for class)
+
 const freedomWallContainers = document.querySelectorAll(
   ".freedomWallContainer"
 );
 const freedomWallDashboard = document.querySelectorAll(".freedomWallDashboard");
 
-// Render a single post
 function renderPost(container, text, docId) {
   const postDiv = document.createElement("div");
   postDiv.classList.add("post-box");
-  postDiv.style.position = "relative"; // Add relative positioning
+  postDiv.style.position = "relative";
   postDiv.style.padding = "15px";
   postDiv.style.margin = "10px 0";
   postDiv.style.border = "1px solid #ddd";
@@ -322,22 +442,20 @@ function renderPost(container, text, docId) {
   container.appendChild(postDiv);
 }
 
-// Real-time updates from Firestore
 const postsQuery = query(
   collection(db, "freedomWallPosts"),
   orderBy("timestamp", "desc")
 );
 
 onSnapshot(postsQuery, (snapshot) => {
-  // Loop through all the containers and update each one with posts
   freedomWallContainers.forEach((container) => {
-    container.innerHTML = ""; // Clear container
+    container.innerHTML = "";
     snapshot.forEach((doc) => {
       renderPost(container, doc.data().text, doc.id);
     });
   });
   freedomWallDashboard.forEach((container) => {
-    container.innerHTML = ""; // Clear container
+    container.innerHTML = "";
     snapshot.forEach((doc) => {
       renderPost(container, doc.data().text, doc.id);
     });
@@ -345,7 +463,7 @@ onSnapshot(postsQuery, (snapshot) => {
 });
 
 /*-----------------------------------------------------------*/
-// DOM elements for event posting
+
 const submitEventButton = document.getElementById("submitEventsPost");
 const eventTextArea = document.getElementById("text-area");
 const eventImageInput = document.getElementById("eventsImage");
@@ -354,7 +472,6 @@ submitEventButton.addEventListener("click", async () => {
   const eventText = eventTextArea.value.trim();
   const eventImageFile = eventImageInput.files[0];
 
-  // Ensure at least text or an image is provided
   if (!eventText && !eventImageFile) {
     alert("Please add either a description or an image for the event.");
     return;
@@ -363,7 +480,6 @@ submitEventButton.addEventListener("click", async () => {
   try {
     let imageBase64 = null;
 
-    // Convert the image file to base64 if one is selected
     if (eventImageFile) {
       imageBase64 = await new Promise((resolve, reject) => {
         const reader = new FileReader();
@@ -373,7 +489,6 @@ submitEventButton.addEventListener("click", async () => {
       });
     }
 
-    // Save to Firestore with barangay name and timestamp
     await addDoc(collection(db, "eventsPosts"), {
       text: eventText,
       imageBase64: imageBase64 || null,
@@ -381,7 +496,6 @@ submitEventButton.addEventListener("click", async () => {
       timestamp: new Date(),
     });
 
-    // Reset form
     eventTextArea.value = "";
     eventImageInput.value = "";
 
@@ -391,139 +505,3 @@ submitEventButton.addEventListener("click", async () => {
     alert("Failed to post the event.");
   }
 });
-
-/*---------------------------------------------------------------*/
-function renderEventPost(container, text, imageBase64, barangay, timestamp, docId) {
-  const postDiv = document.createElement("div");
-  postDiv.classList.add("post-box");
-  postDiv.style.width = "90%";
-  postDiv.style.height = "auto";
-  postDiv.style.display = "flex";
-  postDiv.style.flexDirection = "column";
-  postDiv.style.fontSize = "14px";
-  postDiv.style.gap = "10px";
-  postDiv.style.padding = "15px";
-  postDiv.style.paddingBottom = "50px"; // Add extra padding at bottom for button
-  postDiv.style.backgroundColor = "#fff";
-  postDiv.style.borderRadius = "8px";
-  postDiv.style.boxShadow = "0 2px 4px rgba(0,0,0,0.1)";
-  postDiv.style.position = "relative"; // Add relative positioning
-
-  // Add header with barangay and date
-  const headerDiv = document.createElement("div");
-  headerDiv.style.display = "flex";
-  headerDiv.style.justifyContent = "space-between";
-  headerDiv.style.alignItems = "center";
-  headerDiv.style.marginBottom = "10px";
-  headerDiv.style.borderBottom = "1px solid #eee";
-  headerDiv.style.paddingBottom = "5px";
-
-  const barangayText = document.createElement("span");
-  barangayText.textContent = `Posted by: ${barangay}`;
-  barangayText.style.fontWeight = "bold";
-  barangayText.style.color = "#6ec207";
-
-  const dateText = document.createElement("span");
-  dateText.textContent = new Date(timestamp.seconds * 1000).toLocaleString();
-  dateText.style.color = "#666";
-  dateText.style.fontSize = "12px";
-
-  headerDiv.appendChild(barangayText);
-  headerDiv.appendChild(dateText);
-  postDiv.appendChild(headerDiv);
-
-  // Add content container
-  const contentDiv = document.createElement("div");
-  contentDiv.style.display = "flex";
-  contentDiv.style.gap = "15px";
-  contentDiv.style.alignItems = "flex-start";
-  contentDiv.style.marginBottom = "10px"; // Add margin at bottom
-
-  // Add image if available
-  if (imageBase64) {
-    const img = document.createElement("img");
-    img.src = imageBase64;
-    img.style.maxWidth = "30%";
-    img.style.borderRadius = "4px";
-    img.alt = "Event Image";
-    contentDiv.appendChild(img);
-  }
-
-  // Add text
-  if (text) {
-    const postText = document.createElement("p");
-    postText.textContent = text;
-    postText.style.margin = "0";
-    postText.style.color = "#333";
-    contentDiv.appendChild(postText);
-  }
-
-  postDiv.appendChild(contentDiv);
-
-  // Add delete button
-  const deleteButton = document.createElement("button");
-  deleteButton.textContent = "Delete";
-  deleteButton.classList.add("delete-button");
-  deleteButton.style.backgroundColor = "#ff4444";
-  deleteButton.style.color = "white";
-  deleteButton.style.border = "none";
-  deleteButton.style.padding = "8px 15px";
-  deleteButton.style.borderRadius = "4px";
-  deleteButton.style.cursor = "pointer";
-  deleteButton.style.position = "absolute";
-  deleteButton.style.bottom = "15px"; // Increased from 10px to 15px
-  deleteButton.style.right = "15px"; // Increased from 10px to 15px
-  deleteButton.style.fontSize = "14px";
-  deleteButton.style.transition = "background-color 0.3s";
-
-  deleteButton.addEventListener("mouseover", () => {
-    deleteButton.style.backgroundColor = "#ff0000";
-  });
-
-  deleteButton.addEventListener("mouseout", () => {
-    deleteButton.style.backgroundColor = "#ff4444";
-  });
-
-  deleteButton.addEventListener("click", async () => {
-    if (confirm("Are you sure you want to delete this event post?")) {
-      try {
-        await deleteDoc(doc(db, "eventsPosts", docId));
-      } catch (error) {
-        console.error("Error deleting event post: ", error);
-        alert("Failed to delete event post. Please try again.");
-      }
-    }
-  });
-
-  postDiv.appendChild(deleteButton);
-  container.appendChild(postDiv);
-}
-
-// Load and render event posts
-document.addEventListener("DOMContentLoaded", () => {
-  const eventSections = document.querySelectorAll(".event-section-box");
-
-  if (eventSections.length > 0) {
-    const postsQuery = query(
-      collection(db, "eventsPosts"),
-      orderBy("timestamp", "desc")
-    );
-
-    onSnapshot(postsQuery, (snapshot) => {
-      eventSections.forEach((container) => {
-        container.innerHTML = ""; // Clear previous posts
-        snapshot.forEach((doc) => {
-          const data = doc.data();
-          renderEventPost(
-            container,
-            data.text,
-            data.imageBase64,
-            data.barangay,
-            data.timestamp,
-            doc.id
-          );
-        });
-      });
-    });
-  }
-}); 

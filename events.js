@@ -20,7 +20,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// Function to render each event post
 function renderEventPost(container, text, imageBase64, barangay, timestamp) {
   const postDiv = document.createElement("div");
   postDiv.classList.add("post-box1");
@@ -35,7 +34,6 @@ function renderEventPost(container, text, imageBase64, barangay, timestamp) {
   postDiv.style.borderRadius = "8px";
   postDiv.style.boxShadow = "0 2px 4px rgba(0,0,0,0.1)";
 
-  // Add header with barangay and date
   const headerDiv = document.createElement("div");
   headerDiv.style.display = "flex";
   headerDiv.style.justifyContent = "space-between";
@@ -58,13 +56,11 @@ function renderEventPost(container, text, imageBase64, barangay, timestamp) {
   headerDiv.appendChild(dateText);
   postDiv.appendChild(headerDiv);
 
-  // Add content container
   const contentDiv = document.createElement("div");
   contentDiv.style.display = "flex";
   contentDiv.style.gap = "15px";
   contentDiv.style.alignItems = "flex-start";
 
-  // Add image if available
   if (imageBase64) {
     const img = document.createElement("img");
     img.src = imageBase64;
@@ -74,7 +70,6 @@ function renderEventPost(container, text, imageBase64, barangay, timestamp) {
     contentDiv.appendChild(img);
   }
 
-  // Add text
   if (text) {
     const postText = document.createElement("p");
     postText.textContent = text;
@@ -87,7 +82,6 @@ function renderEventPost(container, text, imageBase64, barangay, timestamp) {
   container.appendChild(postDiv);
 }
 
-// Load and render event posts
 document.addEventListener("DOMContentLoaded", () => {
   const eventSections = document.querySelectorAll(".event-section-box");
 
@@ -99,7 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     onSnapshot(postsQuery, (snapshot) => {
       eventSections.forEach((container) => {
-        container.innerHTML = ""; // Clear previous posts
+        container.innerHTML = "";
         snapshot.forEach((doc) => {
           const data = doc.data();
           renderEventPost(

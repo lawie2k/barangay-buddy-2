@@ -16,10 +16,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="login.css" />
     <link rel="stylesheet" href="general.css" />
+    <link rel="stylesheet" href="loader.css" />
+    <link rel="icon" href="img/Big Logo 1.png" type="image/x-icon" />
     <title>Login</title>
   </head>
   <body>
-    <!---------------------sign up------------------>
     <div class="admin-signup" style="display: none" id="signupform">
       <button>
         <i id="back-btn" class="fa-solid fa-arrow-left"></i>
@@ -49,7 +50,6 @@
       </div>
     </div>
 
-    <!------------------login--------------------->
     <div class="admin-login" id="loginform">
       <button>
         <a href="landingPage.html"><i class="fa-solid fa-arrow-left"></i></a>
@@ -75,6 +75,7 @@
         <button id="add-acc">Add new Barangay</button>
       </div>
     </div>
+
     <div class="wave">
       <svg
         width="100%"
@@ -278,7 +279,12 @@
         ></path>
       </svg>
     </div>
-    <div class="loader"></div>
+
+    <div class="loader-wrapper">
+      <div class="loader"></div>
+    </div>
+
     <script type="module" src="login.js" defer></script>
+    <script src="loader.js"></script>
   </body>
 </html>

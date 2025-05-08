@@ -9,7 +9,7 @@ import {
   query,
   orderBy,
   deleteDoc,
-  doc
+  doc,
 } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 import {
   getStorage,
@@ -41,19 +41,17 @@ const db = getFirestore(app);
 const auth = getAuth();
 const storage = getStorage(app);
 
-// The barangay name you're working with
 const barangay = "Magnaga";
 
 document.addEventListener("DOMContentLoaded", async () => {
-  const submissionContainers = document.querySelectorAll(".submissions"); // Handles both dashboard and request section
-  const sectionContainers = document.querySelectorAll(".request-submissions"); // For request message section
+  const submissionContainers = document.querySelectorAll(".submissions");
+  const sectionContainers = document.querySelectorAll(".request-submissions");
 
-  // Display loading message initially
   submissionContainers.forEach((container) => {
     container.innerHTML = "<p>Loading...</p>";
   });
   sectionContainers.forEach((container) => {
-    container.innerHTML = "<p>Loading...</p>"; // Same for the section containers
+    container.innerHTML = "<p>Loading...</p>";
   });
 
   try {
@@ -71,12 +69,11 @@ document.addEventListener("DOMContentLoaded", async () => {
       return;
     }
 
-    // Clear out previous content if any in the dashboard and section containers
     submissionContainers.forEach((container) => {
-      container.innerHTML = ""; // Clear any existing content
+      container.innerHTML = "";
     });
     sectionContainers.forEach((container) => {
-      container.innerHTML = ""; // Clear any existing content
+      container.innerHTML = "";
     });
 
     snapshot.forEach((doc) => {
@@ -103,18 +100,15 @@ document.addEventListener("DOMContentLoaded", async () => {
         }; color: green; font-weight: bold;">✔ Email Sent</span>
       `;
 
-      // Append the new div element to the dashboard container (only once)
       submissionContainers.forEach((container) => {
-        container.appendChild(div.cloneNode(true)); // Clone and append div once per container
+        container.appendChild(div.cloneNode(true));
       });
 
-      // Append the new div element to the request message section (only once)
       sectionContainers.forEach((container) => {
-        container.appendChild(div.cloneNode(true)); // Clone and append div once per section container
+        container.appendChild(div.cloneNode(true));
       });
     });
 
-    // Now that the elements are added to the DOM, attach the event listeners
     const acceptButtons = document.querySelectorAll(".accept-btn");
 
     acceptButtons.forEach((btn) => {
@@ -389,7 +383,15 @@ submitEventButton.addEventListener("click", async () => {
   }
 });
 
-function renderEventPost(container, text, imageBase64, barangay, timestamp, docId) {
+// Function to render event posts (from public view)
+function renderEventPost(
+  container,
+  text,
+  imageBase64,
+  barangay,
+  timestamp,
+  docId
+) {
   const postDiv = document.createElement("div");
   postDiv.classList.add("post-box");
   postDiv.style.width = "90%";
@@ -399,11 +401,11 @@ function renderEventPost(container, text, imageBase64, barangay, timestamp, docI
   postDiv.style.fontSize = "14px";
   postDiv.style.gap = "10px";
   postDiv.style.padding = "15px";
-  postDiv.style.paddingBottom = "50px"; // Add extra padding at bottom for button
+  postDiv.style.paddingBottom = "50px"; // Add padding for delete button
   postDiv.style.backgroundColor = "#fff";
   postDiv.style.borderRadius = "8px";
   postDiv.style.boxShadow = "0 2px 4px rgba(0,0,0,0.1)";
-  postDiv.style.position = "relative"; // Add relative positioning
+  postDiv.style.position = "relative"; // For delete button positioning
 
   // Add header with barangay and date
   const headerDiv = document.createElement("div");
@@ -433,7 +435,7 @@ function renderEventPost(container, text, imageBase64, barangay, timestamp, docI
   contentDiv.style.display = "flex";
   contentDiv.style.gap = "15px";
   contentDiv.style.alignItems = "flex-start";
-  contentDiv.style.marginBottom = "10px"; // Add margin at bottom
+  contentDiv.style.marginBottom = "10px";
 
   // Add image if available
   if (imageBase64) {
@@ -456,7 +458,7 @@ function renderEventPost(container, text, imageBase64, barangay, timestamp, docI
 
   postDiv.appendChild(contentDiv);
 
-  // Add delete button
+  // Add delete button for admin view
   const deleteButton = document.createElement("button");
   deleteButton.textContent = "Delete";
   deleteButton.classList.add("delete-button");
@@ -467,8 +469,8 @@ function renderEventPost(container, text, imageBase64, barangay, timestamp, docI
   deleteButton.style.borderRadius = "4px";
   deleteButton.style.cursor = "pointer";
   deleteButton.style.position = "absolute";
-  deleteButton.style.bottom = "15px"; // Increased from 10px to 15px
-  deleteButton.style.right = "15px"; // Increased from 10px to 15px
+  deleteButton.style.bottom = "15px";
+  deleteButton.style.right = "15px";
   deleteButton.style.fontSize = "14px";
   deleteButton.style.transition = "background-color 0.3s";
 
@@ -495,7 +497,7 @@ function renderEventPost(container, text, imageBase64, barangay, timestamp, docI
   container.appendChild(postDiv);
 }
 
-// Load and render event posts
+// Load and render event posts for public view
 document.addEventListener("DOMContentLoaded", () => {
   const eventSections = document.querySelectorAll(".event-section-box");
 
@@ -516,7 +518,7 @@ document.addEventListener("DOMContentLoaded", () => {
             data.imageBase64,
             data.barangay,
             data.timestamp,
-            doc.id
+            doc.id // Add the document ID
           );
         });
       });
