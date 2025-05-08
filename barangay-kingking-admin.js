@@ -42,7 +42,7 @@ const auth = getAuth();
 const storage = getStorage(app);
 
 // The barangay name you're working with
-const barangay = "Magnaga";
+const barangay = "KingKing";
 
 document.addEventListener("DOMContentLoaded", async () => {
   const submissionContainers = document.querySelectorAll(".submissions"); // Handles both dashboard and request section
@@ -63,10 +63,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     if (snapshot.empty) {
       submissionContainers.forEach((container) => {
-        container.innerHTML = "<p>No submissions found for Magnaga.</p>";
+        container.innerHTML = "<p>No submissions found for KingKing.</p>";
       });
       sectionContainers.forEach((container) => {
-        container.innerHTML = "<p>No submissions found for Magnaga.</p>";
+        container.innerHTML = "<p>No submissions found for KingKing.</p>";
       });
       return;
     }
@@ -170,7 +170,6 @@ const logout = document.getElementById("logout");
 
 logout.addEventListener("click", function () {
   signOut(auth);
-
   window.location.href = "login.html";
 });
 
@@ -204,6 +203,7 @@ document.querySelectorAll(".admin-items > div").forEach((div) => {
     div.style.display = "none";
   }
 });
+
 /*----------------------------------------------------------------*/
 document.addEventListener("DOMContentLoaded", async () => {
   const submissionContainers = document.querySelectorAll(`.${barangay}Records`);
@@ -252,12 +252,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 });
+
 /*-------------------------------------------------------------------*/
 // DOM elements to display posts (using querySelectorAll for class)
 const freedomWallContainers = document.querySelectorAll(
   ".freedomWallContainer"
 );
 const freedomWallDashboard = document.querySelectorAll(".freedomWallDashboard");
+
 // Render a single post
 function renderPost(container, text, docId) {
   const postDiv = document.createElement("div");
@@ -341,10 +343,11 @@ onSnapshot(postsQuery, (snapshot) => {
     });
   });
 });
+
 /*-----------------------------------------------------------*/
 // DOM elements for event posting
 const submitEventButton = document.getElementById("submitEventsPost");
-const eventTextArea = document.getElementById("text-area"); // Make sure this matches your HTML
+const eventTextArea = document.getElementById("text-area");
 const eventImageInput = document.getElementById("eventsImage");
 
 submitEventButton.addEventListener("click", async () => {
@@ -389,6 +392,7 @@ submitEventButton.addEventListener("click", async () => {
   }
 });
 
+/*---------------------------------------------------------------*/
 function renderEventPost(container, text, imageBase64, barangay, timestamp, docId) {
   const postDiv = document.createElement("div");
   postDiv.classList.add("post-box");
@@ -522,4 +526,4 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
   }
-});
+}); 

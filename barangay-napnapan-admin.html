@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Vina+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Napnapan Admin Dashboard</title>
+    <link rel="stylesheet" href="admin.css" />
+    <script type="module" src="kingking-admin.js"></script>
+  </head>
+  <body>
+    <div class="text-top">
+      <img src="img/BarangayBuddy Logo .png" alt="" />
+      <h1>Barangay Napnapan – Admin Dashboard</h1>
+    </div>
+
+    <div class="admin-items">
+      <div class="sideMenu">
+        <div class="side-items">
+          <div class="side-text">
+            <button data-target="dashboard">
+              <i class="fa-solid fa-desktop"></i>
+              <h2>dashboard</h2>
+            </button>
+          </div>
+          <div class="side-text">
+            <button data-target="resident-rec-section">
+              <i class="fa-solid fa-users"></i>
+              <h2>resident-records</h2>
+            </button>
+          </div>
+          <div class="side-text">
+            <button data-target="request-message-section">
+              <i class="fa-solid fa-envelope"></i>
+              <h2>request</h2>
+            </button>
+          </div>
+          <div class="side-text">
+            <button data-target="events-section">
+              <i class="fa-solid fa-calendar-days"></i>
+              <h2>events</h2>
+            </button>
+          </div>
+          <div class="side-text">
+            <button data-target="freedom-wall-section">
+              <i class="fa-solid fa-comment"></i>
+              <h2>freedom wall</h2>
+            </button>
+          </div>
+          <div class="side-text">
+            <button id="logout">
+              <i class="fa-solid fa-right-from-bracket"></i>
+              <h2>Log Out</h2>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="dashboard">
+        <div class="resident-rec">
+          <div class="resident-text"><h2>RESIDENT RECORDS SUMMARY</h2></div>
+          <div class="resident-box">
+            <div class="resident-items">
+              <h2>population</h2>
+              <div class="circle"><h3>40%</h3></div>
+            </div>
+            <div class="resident-items">
+              <h2>Male</h2>
+              <div class="circle"><h3>20%</h3></div>
+            </div>
+            <div class="resident-items">
+              <h2>Registered Voters</h2>
+              <div class="circle"><h3>30%</h3></div>
+            </div>
+            <div class="resident-items">
+              <h2>Girls</h2>
+              <div class="circle"><h3>20%</h3></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="request-message">
+          <div class="request-message-text"><h2>REQUEST MESSAGE</h2></div>
+          <div class="request-content">
+            <div class="submissions">
+              <p>Loading submissions...</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="freedom-wall">
+          <div class="freedom-wall-text">
+            <h2>FREEDOM WALL</h2>
+          </div>
+          <div class="freedom-wall-items">
+            <div class="freedomWallDashboard">loading....</div>
+          </div>
+        </div>
+
+        <div class="events">
+          <div class="events-text"><h2>EVENTS</h2></div>
+          <div class="event-item">
+            <div class="event-section-box">loading...</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="resident-rec-section">
+        <div class="resident-section-text">
+          <h2>Resident Records for KingKing</h2>
+        </div>
+        <div class="residentRecord">
+          <h3 class="KingKingRecords">Loading...</h3>
+        </div>
+      </div>
+      <div class="request-message-section">
+        <div class="request-section-text"><h2>Request</h2></div>
+        <div class="request-submissions">
+          <div class="submissions">
+            <p>Loading submissions...</p>
+          </div>
+        </div>
+      </div>
+      <div class="freedom-wall-section">
+        <div class="freedom-wall-section-text"><h2>Freedom Wall</h2></div>
+        <div class="freedomWallContainer">loading....</div>
+      </div>
+      <div class="events-section">
+        <div class="events-section-text"><h2>Events Posting</h2></div>
+        <div class="events-section-box">
+          <div class="events-section-items">
+            <div class="text-area-buttons">
+              <input type="file" id="eventsImage" accept="image/*" />
+              <button id="submitEventsPost">Post</button>
+            </div>
+            <div class="text-area">
+              <textarea id="text-area" placeholder="Write your message..."></textarea>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="barangay-napnapan-admin.js"></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"
+    ></script>
+    <script type="text/javascript">
+      emailjs.init("8AeJWflF2cbrTW3gA"); // Replace with your actual public key
+    </script>
+  </body>
+</html>

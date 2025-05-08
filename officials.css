@@ -1,0 +1,123 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins";
+}
+.navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-bar,
+h2 {
+  display: flex;
+  margin: 0px 10px 0px 10px;
+}
+.bar-description {
+  background-color: #6ec207;
+  width: auto;
+  height: 300px;
+  align-content: center;
+  justify-items: center;
+}
+.bar-description h1 {
+  font-size: 70px;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 20px;
+}
+.bar-description p {
+  width: 770px;
+  font-size: 20px;
+  color: white;
+  text-align: center;
+}
+.captian-header {
+  align-content: center;
+  justify-items: center;
+  font-size: larger;
+  margin-top: 50px;
+}
+.captian-header h3 {
+  font-size: 50px;
+  font-weight: bold;
+}
+
+.captain {
+  display: flex;
+}
+.pics {
+  margin: 32px;
+}
+
+.top-row,
+.kagawads {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+.top-kagawads {
+  display: flex;
+  justify-content: space-around;
+}
+.official {
+  margin: 10px;
+  text-align: center;
+  font-size: larger;
+}
+
+.official img {
+  border-radius: 50%;
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+}
+.cap-pic {
+  margin-top: 150px;
+}
+footer {
+  background-color: #6ec207;
+  color: white;
+  padding: 20px; /* Adjust overall footer padding */
+  text-align: center; /* Center footer content */
+  box-sizing: border-box;
+  width: 100%;
+  margin-top: 50px;
+}
+
+.footer-items {
+  display: flex;
+  flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+  justify-content: space-between; /* Distribute space between items */
+  align-items: center;
+  gap: 20px; /* Adjust gap between footer items */
+  max-width: 1200px; /* Limit maximum width of footer items */
+  margin: 0 auto; /* Center footer items */
+}
+
+.footer-icons {
+  font-size: 1em;
+  display: flex;
+  align-items: center;
+}
+
+.footer-icons a {
+  color: white;
+  margin-left: 15px;
+  text-decoration: none; /* Remove underlines from links */
+}
+
+.footer-icons a:hover {
+  color: #ffeb00;
+}
+
+.footer-icons i {
+  font-size: 1.5em;
+  margin-right: 5px;
+}
+
+.footer-allRights {
+  font-size: 0.9em;
+}

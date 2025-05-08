@@ -8,15 +8,19 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Vina+Sans&display=swap"
+      rel="stylesheet"
+    />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="officials.css" />
     <link rel="stylesheet" href="navbar.css" />
-    <link rel="stylesheet" href="forms.css" />
-    <link rel="stylesheet" href="footer.css" />
-    <title>form</title>
+    <link rel="stylesheet" href="landingPage.css" />
+    <title>Barangay Officials</title>
   </head>
+
   <body>
-    <!---------------------navbar-------------------->
     <header class="navbar">
       <div class="nav-logo">
         <img class="nav-img" src="img/BarangayBuddy Logo .png" alt="" />
@@ -64,9 +68,13 @@
                 >Brgy. Officials <i class="fa-solid fa-caret-down"></i
               ></a>
               <ul class="brgy-officials">
-                <li><a href="officials-brgy-kingking.html">brgy. kingking</a></li>
+                <li>
+                  <a href="officials-brgy-kingking.html">brgy. kingking</a>
+                </li>
                 <li><a href="officials-brgy-magnaga.html">brgy. magnaga</a></li>
-                <li><a href="officials-brgy-napnapan.html">brgy. napnapan</a></li>
+                <li>
+                  <a href="officials-brgy-napnapan.html">brgy. napnapan</a>
+                </li>
               </ul>
             </li>
           </ul>
@@ -75,6 +83,8 @@
         </ul>
       </nav>
     </header>
+    <!---------------------navbar end-------------------->
+
     <!---------------------sidebar-------------------->
     <aside class="sidebar">
       <button class="exit-btn">
@@ -82,13 +92,12 @@
       </button>
       <nav class="sidebar-item">
         <ul class="sidebar-btn">
-          <li><a href="landingPage.html">Home</a></li>
+          <li><a href="">Home</a></li>
           <li><a href="about us.html">About Us</a></li>
           <li>
             <a class="side-btn" href=""
-              >Services
-              <i class="fa-solid fa-caret-down"></i>
-            </a>
+              >Services<i class="fa-solid fa-caret-down"></i
+            ></a>
             <ul class="side-dropdown">
               <li>
                 <a href=""
@@ -115,110 +124,107 @@
               </li>
             </ul>
           </li>
-          <ul class="officials-dropdown">
-            <li>
-              <a class="nav-btn" href=""
-                >Brgy. Officials <i class="fa-solid fa-caret-down"></i
-              ></a>
-              <ul class="brgy-officials">
-                <li><a href="officials-brgy-kingking.html">brgy. kingking</a></li>
-                <li><a href="officials-brgy-magnaga.html">brgy. magnaga</a></li>
-                <li><a href="officials-brgy-napnapan.html">brgy. napnapan</a></li>
-            </li>
-          </ul>
+          <li>
+            <a href=""
+              >Brgy. Officials <i class="fa-solid fa-caret-down"></i
+            ></a>
+            <ul>
+              <li><a href="officials-brgy-kingking.html">brgy. kingking</a></li>
+              <li><a href="officials-brgy-magnaga.html">brgy. magnaga</a></li>
+              <li><a href="officials-brgy-napnapan.html">brgy. napnapan</a></li>
+            </ul>
+          </li>
           <li><a href="events.html">Events</a></li>
           <li><a href="login.html">Admin</a></li>
         </ul>
       </nav>
     </aside>
 
-    <!---------------------navbar end-------------------->
+    <div>
+      <div class="bar-description">
+        <h1>BARANGAY OFFICIALS</h1>
+        <p>
+          Get to know the dedicated barangay officials from different
+          communities who trust and use Barangay Buddy. Together, we're working
+          to bring faster, easier, and more efficient public service to every
+          corner of the barangay.
+        </p>
+      </div>
 
-    <section class="hero">
-      <div class="hero-text">
-        <h2>Barangay Certification</h2>
-        <h1>Form</h1>
+      <div class="captian-header">
+        <h3>MUNICIPALITY OF PANTUKAN</h3>
+        <h2>BARANGAY MAGNAGA</h2>
+        <div class="captain">
+          <div class="pics">
+            <img src="img/kingking.jpg" alt="Kingking Logo" />
+          </div>
+          <div class="pics official">
+            <img
+              class="cap-pic"
+              src="img/captainb 2.png"
+              alt="Barangay Captain"
+            />
+            <h2>King Hazzym Mundiz</h2>
+            <p>Barangay Captain</p>
+          </div>
+          <div class="pics">
+            <img src="img/pantukan logo.jpg" alt="Pantukan Logo" />
+          </div>
+        </div>
       </div>
-    </section>
 
-    <section class="form-box">
-      <div class="form1">
-        <div>
-          <h2>First Name *</h2>
-          <input class="input" type="text" required />
+      <div class="top-row">
+        <div class="official spaced">
+          <img src="img/captain.png" alt="Secretary" />
+          <h4>Art Laurence Siojo</h4>
+          <p>Barangay Secretary</p>
         </div>
-        <div>
-          <h2>Middle Name *</h2>
-          <input class="input" type="text" required />
-        </div>
-        <div>
-          <h2>Last Name *</h2>
-          <input class="input" type="text" required />
+        <div class="official spaced">
+          <img src="img/captain.png" alt="Treasurer" />
+          <h4>Art Laurence Siojo</h4>
+          <p>Barangay Treasurer</p>
         </div>
       </div>
-      <div class="form2">
-        <div>
-          <h2>Barangay *</h2>
-          <select name="barangay" class="input">
-            <option value="">Select Barangay</option>
-            <option value="KingKing">KingKing</option>
-            <option value="Magnaga">Magnaga</option>
-            <option value="Napnapan">Napnapan</option>
-          </select>
+      <div class="top-kagawads">
+        <div class="official">
+          <img src="img/captain.png" alt="" />
+          <h4>Art Laurence Siojo</h4>
+          <p>Barangay Kagawad</p>
         </div>
-        <div>
-          <h2>Age *</h2>
-          <input class="input" type="text" required />
+        <div class="official">
+          <img src="img/captain.png" alt="" />
+          <h4>Art Laurence Siojo</h4>
+          <p>Barangay Kagawad</p>
         </div>
-        <div>
-          <h2>Status *</h2>
-          <input class="input" type="text" required />
+        <div class="official">
+          <img src="img/captain.png" alt="" />
+          <h4>Art Laurence Siojo</h4>
+          <p>Barangay Kagawad</p>
         </div>
-      </div>
-      <div class="form3">
-        <div>
-          <h2>Mobile Number *</h2>
-          <input class="input" type="text" required />
-        </div>
-        <div>
-          <h2>Years of Stay *</h2>
-          <input class="input" type="text" required />
-        </div>
-        <div>
-          <h2>Purpose *</h2>
-          <select name="Purpose" class="input">
-            <option value="">none</option>
-            <option value="4p's Validation">4ps Validation</option>
-            <option value="Common Law">Common Law</option>
-            <option value="Identification">Identification</option>
-            <option value="Loan">Loan</option>
-            <option value="Medical Assistance">Medical Assistance</option>
-            <option value="Previous Residency">Previous Residency</option>
-          </select>
+        <div class="official">
+          <img src="img/captain.png" alt="" />
+          <h4>Art Laurence Siojo</h4>
+          <p>Barangay Kagawad</p>
         </div>
       </div>
-      <div class="form4">
-        <div>
-          <h2>Name of Student/patient *</h2>
-          <input class="input" type="text" required />
+      <div class="kagawads">
+        <div class="official">
+          <img src="img/captain.png" alt="" />
+          <h4>Art Laurence Siojo</h4>
+          <p>Barangay Kagawad</p>
         </div>
-        <div>
-          <h2>Address *</h2>
-          <input class="input" type="text" required />
+        <div class="official">
+          <img src="img/captain.png" alt="" />
+          <h4>Art Laurence Siojo</h4>
+          <p>Barangay Kagawad</p>
         </div>
-        <div>
-          <h2>Relationship</h2>
-          <input class="input" type="text" required />
+        <div class="official">
+          <img src="img/captain.png" alt="" />
+          <h4>Art Laurence Siojo</h4>
+          <p>Barangay Kagawad</p>
         </div>
       </div>
-      <div class="email-form">
-        <h2>Email</h2>
-        <input class="input-email" type="email" required />
-      </div>
-      <div class="submit-btn">
-        <button id="submit-btn">Submit</button>
-      </div>
-    </section>
+    </div>
 
     <footer>
       <div class="footer-items">
@@ -233,7 +239,6 @@
       </div>
     </footer>
 
-    <script type="module" src="formsubmit.js"></script>
-    <script src="landingPage.js"></script>
+    <script type="module" src="landingPage.js"></script>
   </body>
 </html>

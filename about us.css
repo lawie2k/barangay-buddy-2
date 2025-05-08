@@ -1,0 +1,138 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Poppins";
+}
+.top {
+  width: 100%;
+  height: 150px;
+  background-color: #6ec207;
+  color: white;
+  justify-self: center;
+  text-align: center;
+}
+.text-top {
+  font-size: 70px;
+  padding-top: 28px;
+  font-weight: bold;
+}
+.hero {
+  width: 100%;
+  height: 500px;
+}
+.hero-items {
+  display: flex;
+  align-items: center;
+  justify-self: center;
+  gap: 327px;
+  padding-top: 80px;
+}
+.hero-text {
+  width: 611px;
+  height: 330px;
+}
+.hero-text h2 {
+  font-size: 70px;
+  font-weight: bold;
+  line-height: 102%;
+  padding-top: 30px;
+}
+.hero-text p {
+  font-size: 20px;
+}
+.mission {
+  width: 100%;
+  height: 450px;
+  background-color: #6ec207;
+  text-align: center;
+}
+.mission-text {
+  color: white;
+  justify-self: center;
+  padding-top: 45px;
+}
+.mission-text i {
+  font-size: 84px;
+  margin-bottom: 10px;
+}
+.mission-text h2 {
+  font-size: 70px;
+  font-weight: bold;
+  line-height: 102%;
+  margin-bottom: 10px;
+}
+.mission-text p {
+  width: 400px;
+  justify-self: center;
+}
+.team {
+  width: 100%;
+  height: 700px;
+}
+.team-items {
+  justify-self: center;
+  text-align: center;
+  padding-top: 120px;
+}
+.team-text h2 {
+  font-size: 70px;
+}
+.team-text p {
+  font-size: 20px;
+  width: 670px;
+  justify-self: center;
+  margin-bottom: 30px;
+}
+.team-pics {
+  display: flex;
+  gap: 35px;
+  width: 1200px;
+}
+.team-pics img:hover {
+  transform: translate(-5px, -10px);
+  transition: 0.8s ease-out;
+}
+footer {
+  background-color: #6ec207;
+  color: white;
+  padding: 20px; /* Adjust overall footer padding */
+  text-align: center; /* Center footer content */
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.footer-items {
+  display: flex;
+  flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+  justify-content: space-between; /* Distribute space between items */
+  align-items: center;
+  gap: 20px; /* Adjust gap between footer items */
+  max-width: 1200px; /* Limit maximum width of footer items */
+  margin: 0 auto; /* Center footer items */
+}
+
+.footer-icons {
+  font-size: 1em;
+  display: flex;
+  align-items: center;
+}
+
+.footer-icons a {
+  color: white;
+  margin-left: 15px;
+  text-decoration: none; /* Remove underlines from links */
+}
+
+.footer-icons a:hover {
+  color: #ffeb00;
+}
+
+.footer-icons i {
+  font-size: 1.5em;
+  margin-right: 5px;
+}
+
+.footer-allRights {
+  font-size: 0.9em;
+}

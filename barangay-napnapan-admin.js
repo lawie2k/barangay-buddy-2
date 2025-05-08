@@ -42,7 +42,7 @@ const auth = getAuth();
 const storage = getStorage(app);
 
 // The barangay name you're working with
-const barangay = "Magnaga";
+const barangay = "Napnapan"; // Changed from Magnaga to Napnapan
 
 document.addEventListener("DOMContentLoaded", async () => {
   const submissionContainers = document.querySelectorAll(".submissions"); // Handles both dashboard and request section
@@ -63,10 +63,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     if (snapshot.empty) {
       submissionContainers.forEach((container) => {
-        container.innerHTML = "<p>No submissions found for Magnaga.</p>";
+        container.innerHTML = "<p>No submissions found for Napnapan.</p>"; // Changed from Magnaga
       });
       sectionContainers.forEach((container) => {
-        container.innerHTML = "<p>No submissions found for Magnaga.</p>";
+        container.innerHTML = "<p>No submissions found for Napnapan.</p>"; // Changed from Magnaga
       });
       return;
     }
@@ -219,7 +219,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     if (snapshot.empty) {
       submissionContainers.forEach((container) => {
-        container.innerHTML = "<p>No submissions found for KingKing.</p>";
+        container.innerHTML = "<p>No submissions found for Napnapan.</p>"; // Changed from KingKing to Napnapan
       });
       return;
     }

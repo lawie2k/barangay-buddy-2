@@ -8,7 +8,7 @@ body {
 }
 .hero {
   width: 100%;
-  height: 340px;
+  height: 150px;
   color: white;
   background: #111e83;
   background: #6ec207;
@@ -16,7 +16,7 @@ body {
 .hero-text {
   justify-self: center;
   text-align: center;
-  padding-top: 56px;
+  padding-top: 25px;
 }
 .hero-text h2 {
   font-size: 28px;
@@ -64,9 +64,9 @@ body {
   margin-top: 20px;
 }
 .submit-btn button {
-  background-color: #4379f2;
-  color: white;
-  font-size: 16px;
+  background-color: #ffeb00;
+  color: #6ec207;
+  font-size: 20px;
   font-weight: bold;
   padding: 10px;
   padding-left: 25px;
@@ -74,4 +74,10 @@ body {
   border-style: solid;
   border: 0;
   border-radius: 5px;
+}
+.submit-btn button:hover {
+  background-color: #6ec207;
+  color: #ffeb00;
+  transition: 0.3s;
+  cursor: pointer;
 }
