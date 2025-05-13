@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="navbar.css">
     <link rel="stylesheet" href="services.css">
     <link rel="stylesheet" href="loader.css">
+    <link rel="stylesheet" href="toast.css">
     <link rel="icon" href="img/Big Logo 1.png" type="image/x-icon">
     <title>Barangay buddy</title>
   </head>
@@ -39,33 +40,37 @@
         <ul class="navbar-btn">
           <li><a class="nav-btn" href="landingPage.html">Home</a></li>
           <li><a class="nav-btn" href="about us.html">About Us</a></li>
-          <li><a class="nav-btn" href="">Services<i class="fa-solid fa-caret-down"></i></a>
-             <ul class="dropdown">
-              <li><a href="">Barangay Certification<i class="fa-solid fa-caret-down"></i></a>
-                   <ul class="certification-dropdown">
-                    <li><a href="form.html">4P's Validation</a></li>
-                    <li><a href="form.html">Common Law</a></li>
-                    <li><a href="form.html">Identification</a></li>
-                    <li><a href="form.html">Loan</a></li>
-                    <li><a href="form.html">Medical Assistance</a></li>
-                    <li><a href="form.html">Previous Residency</a></li>
-                    <li><a href="form.html">Other Purposes</a></li>
-                  </ul>
-              </li>
-              <li><a href="">Barangay Clearance<i class="fa-solid fa-caret-down"></i></a>
-                <ul class="clearance-dropdown">
-                  <li><a href="form.html">COMELEC</a></li>
-                  <li><a href="form.html">Employment</a></li>
+          <li class="services-dropdown">
+            <a class="nav-btn">Services<i class="fa-solid fa-caret-down"></i></a>
+            <ul class="dropdown">
+              <li>
+                <a href="">Barangay Certification<i class="fa-solid fa-caret-down"></i></a>
+                <ul class="certification-dropdown">
+                  <li><a href="form.html">4P's Validation</a></li>
+                  <li><a href="form.html">Barangay Clearance</a></li>
+                  <li><a href="form.html">Certificate of Indigency</a></li>
+                  <li><a href="form.html">Solo Parent ID</a></li>
+                  <li><a href="form.html">Residency Certificate</a></li>
+                  <li><a href="form.html">Business Permit</a></li>
+                  <li><a href="form.html">Late Birth Registration</a></li>
+                  <li><a href="form.html">Senior Citizen ID</a></li>
                 </ul>
               </li>
             </ul>
           </li>
           <ul class="officials-dropdown">
-            <li><a class="nav-btn" href="">Brgy. Officials <i class="fa-solid fa-caret-down"></i></a>
+            <li>
+              <a class="nav-btn"
+                >Brgy. Officials <i class="fa-solid fa-caret-down"></i
+              ></a>
               <ul class="brgy-officials">
-                <li><a href="officials-brgy-kingking.html">brgy. kingking</a></li>
-              <li><a href="officials-brgy-magnaga.html">brgy. magnaga</a></li>
-              <li><a href="officials-brgy-napnapan.html">brgy. napnapan</a></li>
+                <li>
+                  <a href="officials-brgy-kingking.html">brgy. kingking</a>
+                </li>
+                <li><a href="officials-brgy-magnaga.html">brgy. magnaga</a></li>
+                <li>
+                  <a href="officials-brgy-napnapan.html">brgy. napnapan</a>
+                </li>
               </ul>
             </li>
           </ul>
@@ -75,36 +80,42 @@
       </nav>
     </header>
     <!---------------------navbar end-------------------->
-    
+
     <!---------------------sidebar-------------------->
     <aside class="sidebar">
-      <button class="exit-btn"><i class="fa-solid fa-xmark" style="color: #1e38e9;"></i></button>
+      <button class="exit-btn">
+        <i class="fa-solid fa-xmark" style="color: #1e38e9"></i>
+      </button>
       <nav class="sidebar-item">
         <ul class="sidebar-btn">
-          <li><a href="">Home</a></li>
+          <li><a href="landingPage.html">Home</a></li>
           <li><a href="about us.html">About Us</a></li>
-          <li><a class="side-btn" href="">Services<i class="fa-solid fa-caret-down"></i></a>
+          <li>
+            <a class="side-btn" href=""
+              >Services<i class="fa-solid fa-caret-down"></i
+            ></a>
             <ul class="side-dropdown">
-             <li><a href="">Barangay Certification<i class="fa-solid fa-caret-down"></i></a>
-                  <ul class="certification-sidedropdown">
-                    <li><a href="form.html">4P's Validation</a></li>
-                    <li><a href="form.html">Common Law</a></li>
-                    <li><a href="form.html">Identification</a></li>
-                    <li><a href="form.html">Loan</a></li>
-                    <li><a href="form.html">Medical Assistance</a></li>
-                    <li><a href="form.html">Previous Residency</a></li>
-                    <li><a href="form.html">Other Purposes</a></li>
-                 </ul>
-             </li>
-             <li><a href="">Barangay Clearance<i class="fa-solid fa-caret-down"></i></a>
-               <ul class="clearance-sidedropdown">
-                 <li><a href="">COMELEC</a></li>
-                 <li><a href="">Employment</a></li>
-               </ul>
-             </li>
-           </ul>
-         </li>
-          <li><a href="">Brgy. Officials  <i class="fa-solid fa-caret-down"></i></a>
+              <li>
+                <a href=""
+                  >Barangay Certification<i class="fa-solid fa-caret-down"></i
+                ></a>
+                <ul class="certification-sidedropdown">
+                  <li><a href="form.html">4P's Validation</a></li>
+                  <li><a href="form.html">Barangay Clearance</a></li>
+                  <li><a href="form.html">Certificate of Indigency</a></li>
+                  <li><a href="form.html">Solo Parent ID</a></li>
+                  <li><a href="form.html">Residency Certificate</a></li>
+                  <li><a href="form.html">Business Permit</a></li>
+                  <li><a href="form.html">Late Birth Registration</a></li>
+                  <li><a href="form.html">Senior Citizen ID</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href=""
+              >Brgy. Officials <i class="fa-solid fa-caret-down"></i
+            ></a>
             <ul>
               <li><a href="officials-brgy-kingking.html">brgy. kingking</a></li>
               <li><a href="officials-brgy-magnaga.html">brgy. magnaga</a></li>
@@ -280,9 +291,11 @@
        <form id="freedomWallForm">
         <div class="post-freedomWall-input">
           <input id="freedomWallInput" type="text" placeholder="type here" required />
-          <button type="submit">Post</button>
-       </form>
+          <button type="submit" onclick="ShowToast()">Post</button>
+        </div>
+      </form>
     </section>
+    <div id="toast"><h2>Submitted</h2></div>
 
     <section class="services-cards">
 
@@ -390,5 +403,27 @@
 
     <script type="module" src="landingPage.js"></script>
     <script src="loader.js"></script>
+
+
+    <script>
+      let isToastShowing = false;
+      
+      function ShowToast(){
+        const input = document.getElementById("freedomWallInput");
+        if (!input.value.trim()) return;
+        if (isToastShowing) return;
+        
+        const toast = document.getElementById("toast");
+        isToastShowing = true;
+        toast.className = "show";
+        
+        setTimeout(function(){
+          toast.className = "";
+          setTimeout(() => {
+            isToastShowing = false;
+          }, 500);
+        }, 3000);
+      }
+    </script>
   </body>
 </html>

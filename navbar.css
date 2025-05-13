@@ -91,6 +91,7 @@
 
 .dropdown {
   font-size: 12px;
+  font-weight: bold;
   display: block;
   color: white;
 }
@@ -127,7 +128,7 @@ ul li:hover .dropdown {
   padding-left: 10px;
   padding-top: 20px;
   padding-bottom: 20px;
-  width: 150px;
+  width: 200px;
   display: none;
   background-color: white;
   z-index: 2;

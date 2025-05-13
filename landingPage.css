@@ -135,7 +135,7 @@ section svg {
   font-weight: bold;
   border-radius: 5px;
 }
-.sect2-text :hover {
+.sect2-text button:hover {
   background-color: #6ec207;
   cursor: pointer;
   color: #ffeb00;
@@ -394,4 +394,53 @@ section svg {
   .sect2-img {
     max-width: 500px;
   }
+}
+
+/* Toast Styles */
+#toast {
+  visibility: hidden;
+  width: 100%;
+  max-width: 450px;
+  background-color: white;
+  border: 1px solid gray;
+  padding: 20px;
+  display: flex;
+  justify-self: center;
+  justify-items: center;
+  text-align: center;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 50;
+  opacity: 0;
+  transform: translateX(20px);
+  transition: all 0.8s ease-in-out;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  border-radius: 4px;
+}
+
+#toast.show {
+  visibility: visible;
+  opacity: 1;
+  transform: translateX(0);
+}
+
+#toast.success {
+  background-color: #4CAF50;
+  color: white;
+}
+
+#toast.error {
+  background-color: #f44336;
+  color: white;
+}
+
+#toast.info {
+  background-color: #2196F3;
+  color: white;
+}
+
+#toast.warning {
+  background-color: #ff9800;
+  color: white;
 }

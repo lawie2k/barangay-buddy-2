@@ -24,6 +24,19 @@ const db = getFirestore(app);
 
 const filename = window.location.pathname.split("/").pop().split(".")[0];
 
+function showToast(message, type = 'success') {
+  const toast = document.getElementById("toast");
+  toast.textContent = message;
+  toast.className = "show " + type;
+  
+  setTimeout(function(){
+    toast.className = "";
+    setTimeout(() => {
+      toast.className = "";
+    }, 500);
+  }, 3000);
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   const submitButton = document.getElementById("submit-btn");
 
@@ -34,11 +47,11 @@ document.addEventListener("DOMContentLoaded", () => {
       const selectedBarangay = inputs[3].value;
 
       if (!selectedBarangay) {
-        alert("Please select barangay");
+        showToast("Please select barangay", "error");
         return;
       }
       if (!inputs[8].value) {
-        alert("Please select purpose");
+        showToast("Please select purpose", "error");
         return;
       }
 
@@ -66,10 +79,10 @@ document.addEventListener("DOMContentLoaded", () => {
           collection(db, `formSubmissions/${selectedBarangay}/submissions`),
           data
         );
-        alert("Form submitted successfully!");
+        showToast("Form submitted successfully!", "success");
       } catch (error) {
         console.error("Error saving form", error);
-        alert("Submission failed");
+        showToast("Submission failed", "error");
       }
     });
   }

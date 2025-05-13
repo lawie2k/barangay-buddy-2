@@ -37,7 +37,7 @@ exitbutton.addEventListener("click", () => {
   sidebar.classList.remove("open");
 });
 
-/*---------------------------------------------------------*/
+/*-----------------------display freedom wall----------------------------------*/
 
 // Select DOM elements for the Freedom Wall section
 const freedomWallForm = document.getElementById("freedomWallForm");

@@ -10,6 +10,7 @@ import {
   orderBy,
   deleteDoc,
   doc,
+  updateDoc,
 } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 import {
   getStorage,
@@ -22,6 +23,75 @@ import {
   onAuthStateChanged,
   signOut,
 } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+
+// Function to show snackbar notification
+function showSnackbar(message, type = 'success') {
+  const snackbar = document.createElement('div');
+  snackbar.className = `snackbar ${type}`;
+  snackbar.textContent = message;
+  document.body.appendChild(snackbar);
+
+  // Add show class after a small delay to trigger animation
+  setTimeout(() => {
+    snackbar.classList.add('show');
+  }, 100);
+
+  // Remove snackbar after 3 seconds
+  setTimeout(() => {
+    snackbar.classList.remove('show');
+    setTimeout(() => {
+      document.body.removeChild(snackbar);
+    }, 300);
+  }, 3000);
+}
+
+// Function to send email using EmailJS
+async function sendEmail(email, name) {
+  try {
+    const serviceID = "service_qhp2e0j";  // Your service ID
+    const templateID = "template_kdtwkdr";  // Your template ID
+    const publicKey = "8AeJWflF2cbrTW3gA";  // Your public key
+
+    const templateParams = {
+      to_email: email,
+      to_name: name,
+      message: `Hello ${name}, your submission has been received. Thank you!`
+    };
+
+    // Make sure EmailJS is initialized
+    emailjs.init(publicKey);
+
+    // Send the email
+    const response = await emailjs.send(serviceID, templateID, templateParams);
+    console.log("Email sent successfully:", response);
+    showSnackbar("Email sent successfully!", "success");
+  } catch (error) {
+    console.error("Error sending email:", error);
+    showSnackbar("Failed to send email. Please try again.", "error");
+    throw error;
+  }
+}
+
+// Function to show toast notifications
+function showToast(message, type = "success") {
+  const toast = document.createElement("div");
+  toast.className = `toast ${type}`;
+  toast.textContent = message;
+  document.body.appendChild(toast);
+
+  // Trigger animation
+  setTimeout(() => {
+    toast.classList.add("show");
+  }, 100);
+
+  // Remove toast after 3 seconds
+  setTimeout(() => {
+    toast.classList.remove("show");
+    setTimeout(() => {
+      document.body.removeChild(toast);
+    }, 300);
+  }, 3000);
+}
 
 // Your Firebase configuration
 const firebaseConfig = {
@@ -82,8 +152,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       div.style.border = "1px solid #ccc";
       div.style.padding = "10px";
       div.style.margin = "10px 0";
-      const emailSent =
-        localStorage.getItem(`emailSent-${data.email}`) === "true";
       div.innerHTML = `
         <strong>${data.firstName} ${data.lastName}</strong><br>
         Age: ${data.age}<br>
@@ -94,9 +162,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         ).toLocaleString()}
         <button class="accept-btn" data-email="${data.email}" data-name="${
         data.firstName
-      }">Send Email</button>
+      }" data-doc-id="${doc.id}">Send Email</button>
         <span class="accepted-msg" style="display:${
-          emailSent ? "inline" : "none"
+          data.emailSent ? "inline" : "none"
         }; color: green; font-weight: bold;">✔ Email Sent</span>
       `;
 
@@ -110,36 +178,36 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
     const acceptButtons = document.querySelectorAll(".accept-btn");
-
     acceptButtons.forEach((btn) => {
+      const docId = btn.getAttribute("data-doc-id");
       const email = btn.getAttribute("data-email");
-      const emailSent = localStorage.getItem(`emailSent-${email}`) === "true";
+      const emailSent = btn.nextElementSibling.style.display === "inline";
 
-      // If the email has already been sent, disable the button and show the message
       if (emailSent) {
         btn.disabled = true;
-        btn.textContent = "Email Sent"; // Mark as sent
-        btn.nextElementSibling.style.display = "inline"; // Show the "sent" message
+        btn.textContent = "Email Sent";
       }
 
-      // Button click event listener
-      btn.addEventListener("click", () => {
+      btn.addEventListener("click", async () => {
         const name = btn.getAttribute("data-name");
+        try {
+          // Send the email first
+          await sendEmail(email, name);
 
-        // Debugging: Let's log the email and name to see if they're being passed correctly
-        console.log(`Email: ${email}, Name: ${name}`);
+          // Only update Firestore if email was sent successfully
+          await updateDoc(doc(db, `formSubmissions/${barangay}/submissions`, docId), {
+            emailSent: true
+          });
 
-        // ✅ Save status in localStorage (so that it persists across page reload)
-        localStorage.setItem(`emailSent-${email}`, "true");
-
-        // Send email when the admin clicks the button
-        sendEmail(email, name);
-
-        // Disable the button and update its text
-        btn.disabled = true;
-        btn.textContent = "Email Sent"; // Mark as sent
-        // Show the "sent" message next to the button
-        btn.nextElementSibling.style.display = "inline";
+          // Update UI only after successful email send and Firestore update
+          btn.disabled = true;
+          btn.textContent = "Email Sent";
+          btn.nextElementSibling.style.display = "inline";
+        } catch (error) {
+          console.error("Error sending email:", error);
+          alert("Failed to send email. Please try again.");
+          // Don't update Firestore or UI if email failed
+        }
       });
     });
   } catch (error) {
@@ -247,16 +315,17 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 });
 /*-------------------------------------------------------------------*/
-// DOM elements to display posts (using querySelectorAll for class)
+// DOM elements to display posts
 const freedomWallContainers = document.querySelectorAll(
   ".freedomWallContainer"
 );
 const freedomWallDashboard = document.querySelectorAll(".freedomWallDashboard");
+
 // Render a single post
 function renderPost(container, text, docId) {
   const postDiv = document.createElement("div");
   postDiv.classList.add("post-box");
-  postDiv.style.position = "relative"; // Add relative positioning
+  postDiv.style.position = "relative";
   postDiv.style.padding = "15px";
   postDiv.style.margin = "10px 0";
   postDiv.style.border = "1px solid #ddd";
@@ -274,43 +343,8 @@ function renderPost(container, text, docId) {
   postText.style.margin = "0 0 10px 0";
   postText.style.color = "#666";
 
-  const deleteButton = document.createElement("button");
-  deleteButton.textContent = "Delete";
-  deleteButton.classList.add("delete-button");
-  deleteButton.style.backgroundColor = "#ff4444";
-  deleteButton.style.color = "white";
-  deleteButton.style.border = "none";
-  deleteButton.style.padding = "8px 15px";
-  deleteButton.style.borderRadius = "4px";
-  deleteButton.style.cursor = "pointer";
-  deleteButton.style.position = "absolute";
-  deleteButton.style.top = "10px";
-  deleteButton.style.right = "10px";
-  deleteButton.style.fontSize = "14px";
-  deleteButton.style.transition = "background-color 0.3s";
-
-  deleteButton.addEventListener("mouseover", () => {
-    deleteButton.style.backgroundColor = "#ff0000";
-  });
-
-  deleteButton.addEventListener("mouseout", () => {
-    deleteButton.style.backgroundColor = "#ff4444";
-  });
-
-  deleteButton.addEventListener("click", async () => {
-    if (confirm("Are you sure you want to delete this post?")) {
-      try {
-        await deleteDoc(doc(db, "freedomWallPosts", docId));
-      } catch (error) {
-        console.error("Error deleting post: ", error);
-        alert("Failed to delete post. Please try again.");
-      }
-    }
-  });
-
   postDiv.appendChild(userName);
   postDiv.appendChild(postText);
-  postDiv.appendChild(deleteButton);
   container.appendChild(postDiv);
 }
 
@@ -458,7 +492,6 @@ function renderEventPost(
 
   postDiv.appendChild(contentDiv);
 
-  // Add delete button for admin view
   const deleteButton = document.createElement("button");
   deleteButton.textContent = "Delete";
   deleteButton.classList.add("delete-button");
@@ -523,5 +556,220 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       });
     });
+  }
+});
+
+/*-----------------------------resident records------------------------------*/
+document.addEventListener("DOMContentLoaded", async () => {
+  const residentRecordsContainer = document.querySelector(
+    ".resident-rec-magnaga"
+  );
+  const firstnameInput = document.getElementById("firstname");
+  const lastnameInput = document.getElementById("lastname");
+  const addressInput = document.getElementById("address");
+  const genderInput = document.getElementById("gender");
+  const registeredVotersInput = document.getElementById("registeredVoters");
+  const addRecordButton = document.getElementById("addResidentRecord");
+  const recordsList = document.querySelector(".records-list");
+  const recordTemplate = document.getElementById("record-template");
+
+  // Function to add a new resident record
+  async function addResidentRecord() {
+    const firstname = firstnameInput.value.trim();
+    const lastname = lastnameInput.value.trim();
+    const address = addressInput.value.trim();
+    const gender = genderInput.value.trim();
+    const registeredVoters = registeredVotersInput.value.trim();
+
+    if (!firstname || !lastname || !address || !gender) {
+      showSnackbar("Please fill in all required fields", "error");
+      return;
+    }
+
+    try {
+      // Add the new record to Firestore
+      const docRef = await addDoc(collection(db, `residentRecords/${barangay}/records`), {
+        firstname,
+        lastname,
+        address,
+        gender,
+        registeredVoters: registeredVoters === "yes" || registeredVoters === "Yes",
+        timestamp: new Date()
+      });
+
+      // Create and append the new record to the list immediately
+      const recordClone = recordTemplate.content.cloneNode(true);
+      
+      // Fill in the record data
+      recordClone.querySelector(".record-name").textContent = `${firstname} ${lastname}`;
+      recordClone.querySelector(".record-address").textContent = address;
+      recordClone.querySelector(".record-gender").textContent = gender;
+      recordClone.querySelector(".record-voter").textContent = registeredVoters === "yes" || registeredVoters === "Yes" ? "Yes" : "No";
+      recordClone.querySelector(".record-date").textContent = new Date().toLocaleString();
+
+      // Add delete functionality
+      const deleteButton = recordClone.querySelector(".delete-record");
+      deleteButton.dataset.id = docRef.id;
+      deleteButton.addEventListener("click", async () => {
+        if (confirm("Are you sure you want to delete this record?")) {
+          try {
+            await deleteDoc(doc(db, `residentRecords/${barangay}/records`, deleteButton.dataset.id));
+            deleteButton.closest(".record-item").remove();
+            showSnackbar("Record deleted successfully!", "success");
+          } catch (error) {
+            console.error("Error deleting record:", error);
+            showSnackbar("Failed to delete record. Please try again.", "error");
+          }
+        }
+      });
+
+      recordsList.appendChild(recordClone);
+
+      // Clear inputs after successful submission
+      firstnameInput.value = "";
+      lastnameInput.value = "";
+      addressInput.value = "";
+      genderInput.value = "";
+      registeredVotersInput.value = "";
+
+      showSnackbar("Resident record added successfully!", "success");
+    } catch (error) {
+      console.error("Error adding resident record:", error);
+      showSnackbar("Failed to add resident record. Please try again.", "error");
+    }
+  }
+
+  // Add event listener to the add record button
+  addRecordButton.addEventListener("click", addResidentRecord);
+
+  // Add event listener to the form inputs
+  const formInputs = document.querySelectorAll(".resident-rec-inputs input");
+  formInputs.forEach((input) => {
+    input.addEventListener("keypress", async (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        await addResidentRecord();
+      }
+    });
+  });
+
+  // Load and display existing resident records
+  try {
+    const snapshot = await getDocs(collection(db, `residentRecords/${barangay}/records`));
+
+    if (snapshot.empty) {
+      residentRecordsContainer.innerHTML = "<p>No resident records found.</p>";
+      return;
+    }
+
+    residentRecordsContainer.innerHTML = "";
+
+    snapshot.forEach((docSnapshot) => {
+      const data = docSnapshot.data();
+      const recordClone = recordTemplate.content.cloneNode(true);
+      
+      // Fill in the record data
+      recordClone.querySelector(".record-name").textContent = `${data.firstname} ${data.lastname}`;
+      recordClone.querySelector(".record-address").textContent = data.address;
+      recordClone.querySelector(".record-gender").textContent = data.gender;
+      recordClone.querySelector(".record-voter").textContent = data.registeredVoters ? "Yes" : "No";
+      recordClone.querySelector(".record-date").textContent = new Date(data.timestamp.seconds * 1000).toLocaleString();
+      
+      // Add delete functionality
+      const deleteButton = recordClone.querySelector(".delete-record");
+      deleteButton.dataset.id = docSnapshot.id;
+      deleteButton.addEventListener("click", async () => {
+        if (confirm("Are you sure you want to delete this record?")) {
+          try {
+            await deleteDoc(doc(db, `residentRecords/${barangay}/records`, deleteButton.dataset.id));
+            deleteButton.closest(".record-item").remove();
+            showSnackbar("Record deleted successfully!", "success");
+          } catch (error) {
+            console.error("Error deleting record:", error);
+            showSnackbar("Failed to delete record. Please try again.", "error");
+          }
+        }
+      });
+
+      recordsList.appendChild(recordClone);
+    });
+  } catch (error) {
+    console.error("Error loading resident records:", error);
+    residentRecordsContainer.innerHTML = "<p>Failed to load resident records.</p>";
+  }
+});
+
+// Function to update resident record summary in dashboard
+async function updateResidentSummary() {
+  try {
+    const snapshot = await getDocs(
+      collection(db, `residentRecords/${barangay}/records`)
+    );
+
+    let totalResidents = 0;
+    let maleCount = 0;
+    let femaleCount = 0;
+    let voterCount = 0;
+
+    snapshot.forEach((doc) => {
+      const data = doc.data();
+      totalResidents++;
+
+      // Count by gender
+      if (data.gender.toLowerCase() === "male") {
+        maleCount++;
+      } else if (data.gender.toLowerCase() === "female") {
+        femaleCount++;
+      }
+
+      // Count registered voters
+      if (
+        data.registeredVoters === true ||
+        data.registeredVoters === "yes" ||
+        data.registeredVoters === "Yes"
+      ) {
+        voterCount++;
+      }
+    });
+
+    // Calculate percentages
+    const malePercentage =
+      totalResidents > 0 ? Math.round((maleCount / totalResidents) * 100) : 0;
+    const femalePercentage =
+      totalResidents > 0 ? Math.round((femaleCount / totalResidents) * 100) : 0;
+    const voterPercentage =
+      totalResidents > 0 ? Math.round((voterCount / totalResidents) * 100) : 0;
+    const populationPercentage = 100; // This is always 100% as it represents the total
+
+    // Update the dashboard elements
+    document.querySelector(
+      ".resident-items:nth-child(1) .circle h3"
+    ).textContent = `${populationPercentage}%`;
+    document.querySelector(
+      ".resident-items:nth-child(2) .circle h3"
+    ).textContent = `${malePercentage}%`;
+    document.querySelector(
+      ".resident-items:nth-child(3) .circle h3"
+    ).textContent = `${voterPercentage}%`;
+    document.querySelector(
+      ".resident-items:nth-child(4) .circle h3"
+    ).textContent = `${femalePercentage}%`;
+  } catch (error) {
+    console.error("Error updating resident summary:", error);
+  }
+}
+
+// Add event listener for dashboard tab
+document.addEventListener("DOMContentLoaded", () => {
+  const dashboardTab = document.querySelector(
+    'button[data-target="dashboard"]'
+  );
+  if (dashboardTab) {
+    dashboardTab.addEventListener("click", updateResidentSummary);
+  }
+
+  // Initial update if on dashboard
+  if (document.querySelector(".dashboard").style.display !== "none") {
+    updateResidentSummary();
   }
 });

@@ -73,19 +73,19 @@
           <div class="resident-box">
             <div class="resident-items">
               <h2>population</h2>
-              <div class="circle"><h3>40%</h3></div>
+              <div class="circle"><h3>loading...</h3></div>
             </div>
             <div class="resident-items">
               <h2>Male</h2>
-              <div class="circle"><h3>20%</h3></div>
+              <div class="circle"><h3>loading...</h3></div>
             </div>
             <div class="resident-items">
               <h2>Registered Voters</h2>
-              <div class="circle"><h3>30%</h3></div>
+              <div class="circle"><h3>loading...</h3></div>
             </div>
             <div class="resident-items">
               <h2>Girls</h2>
-              <div class="circle"><h3>20%</h3></div>
+              <div class="circle"><h3>loading...</h3></div>
             </div>
           </div>
         </div>
@@ -104,7 +104,9 @@
             <h2>FREEDOM WALL</h2>
           </div>
           <div class="freedom-wall-items">
-            <div class="freedomWallDashboard">loading....</div>
+            <div class="freedomWallDashboard">
+              <!-- Posts will be loaded here -->
+            </div>
           </div>
         </div>
 
@@ -121,7 +123,30 @@
           <h2>Resident Records for Magnaga</h2>
         </div>
         <div class="residentRecord">
-            <h3 class="MagnagaRecords" data-barangay="Magnaga">Loading...</h3>
+          <div class="resident-rec-inputs">
+            <input type="text" name="firstname" id="firstname" placeholder="First Name">
+            <input type="text" name="lastname" id="lastname" placeholder="Last Name">
+            <input type="text" name="address" id="address" placeholder="Address">
+            <input type="text" name="gender" id="gender" placeholder="Gender">
+            <input type="text" name="registeredVoters" id="registeredVoters" placeholder="Registered Voters">
+          </div>
+          <div class="resident-rec-button"><button id="addResidentRecord" class="add-record">Add Record</button></div>
+          <div class="records-list">
+            <h3 class="resident-rec-magnaga">Loading Resident Records...</h3>
+            <!-- Template for record items -->
+            <template id="record-template">
+              <div class="record-item">
+                <div class="record-content">
+                  <strong>Name:</strong> <span class="record-name"></span><br>
+                  <strong>Address:</strong> <span class="record-address"></span><br>
+                  <strong>Gender:</strong> <span class="record-gender"></span><br>
+                  <strong>Registered Voter:</strong> <span class="record-voter"></span><br>
+                  <strong>Added on:</strong> <span class="record-date"></span>
+                </div>
+                <button class="delete-record">Delete</button>
+              </div>
+            </template>
+          </div>
         </div>
       </div>
       <div class="request-message-section">
@@ -134,7 +159,9 @@
       </div>
       <div class="freedom-wall-section">
         <div class="freedom-wall-section-text"><h2>Freedom Wall</h2></div>
-        <div class="freedomWallContainer">loading....</div>
+        <div class="freedomWallContainer">
+          <!-- Posts will be loaded here -->
+        </div>
       </div>
       <div class="events-section">
         <div class="events-section-text"><h2>Events Posting</h2></div>
