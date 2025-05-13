@@ -37,13 +37,7 @@ const database = getDatabase(app);
 
 const signupForm = document.getElementById("signupform");
 const loginForm = document.getElementById("loginform");
-const addbtn = document.getElementById("add-acc");
 const backbtn = document.getElementById("back-btn");
-
-addbtn.addEventListener("click", () => {
-  loginForm.style.display = "none";
-  signupForm.style.display = "block";
-});
 
 backbtn.addEventListener("click", () => {
   loginForm.style.display = "block";
