@@ -243,16 +243,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
 
   try {
-    // Reset all email sent statuses to false
     const snapshot = await getDocs(
       collection(db, `formSubmissions/${barangay}/submissions`)
     );
-    
-    // Reset all email sent statuses
-    const resetPromises = snapshot.docs.map(doc => 
-      updateDoc(doc.ref, { emailSent: false })
-    );
-    await Promise.all(resetPromises);
 
     if (snapshot.empty) {
       submissionContainers.forEach((container) => {
