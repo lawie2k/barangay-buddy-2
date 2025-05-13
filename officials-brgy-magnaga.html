@@ -20,6 +20,20 @@
     <link rel="stylesheet" href="loader.css" />
     <link rel="icon" href="img/Big Logo 1.png" type="image/x-icon" />
     <title>Barangay Officials</title>
+    <style>
+      .footer-icons {
+        font-size: 0.7em;
+      }
+      .footer-icons i {
+        font-size: 1em;
+      }
+      .footer-icons h2 {
+        font-size: 0.7em;
+      }
+      .footer-allRights h2 {
+        font-size: 0.7em;
+      }
+    </style>
   </head>
 
   <body>
@@ -68,11 +82,11 @@
               ></a>
               <ul class="brgy-officials">
                 <li>
-                  <a href="officials-brgy-kingking.html">brgy. kingking</a>
+                  <a href="officials-brgy-kingking.html">Brgy. Kingking</a>
                 </li>
-                <li><a href="officials-brgy-magnaga.html">brgy. magnaga</a></li>
+                <li><a href="officials-brgy-magnaga.html">Brgy. Magnaga</a></li>
                 <li>
-                  <a href="officials-brgy-napnapan.html">brgy. napnapan</a>
+                  <a href="officials-brgy-napnapan.html">Brgy. Napnapan</a>
                 </li>
               </ul>
             </li>
@@ -119,10 +133,10 @@
             <a href=""
               >Brgy. Officials <i class="fa-solid fa-caret-down"></i
             ></a>
-            <ul>
-              <li><a href="officials-brgy-kingking.html">brgy. kingking</a></li>
-              <li><a href="officials-brgy-magnaga.html">brgy. magnaga</a></li>
-              <li><a href="officials-brgy-napnapan.html">brgy. napnapan</a></li>
+            <ul class="side-dropdown">
+              <li><a href="officials-brgy-kingking.html">Brgy. Kingking</a></li>
+              <li><a href="officials-brgy-magnaga.html">Brgy. Magnaga</a></li>
+              <li><a href="officials-brgy-napnapan.html">Brgy. Napnapan</a></li>
             </ul>
           </li>
           <li><a href="events.html">Events</a></li>
@@ -147,15 +161,15 @@
         <h2>BARANGAY MAGNAGA</h2>
         <div class="captain">
           <div class="pics">
-            <img src="img/magnaga logo 1.png" alt="Kingking Logo" />
+            <img src="img/magnaga logo 1.png" alt="Magnaga Logo" />
           </div>
-          <div class="pics official">
+          <div class="pics-official">
             <img
               class="cap-pic"
               src="img/chied-pic.png"
               alt="Barangay Captain"
             />
-            <h2>Chied Yusof P Mapuro</h2>
+            <h2>Chied yusof Mapuro</h2>
             <p>Barangay Captain</p>
           </div>
           <div class="pics">
@@ -166,8 +180,8 @@
 
       <div class="top-row">
         <div class="official spaced">
-          <img src="img/fyne-shiii.png" alt="Secretary" />
-          <h4>Fiona Cawaling</h4>
+          <img src="img/captain.png" alt="Secretary" />
+          <h4>Art Laurence Siojo</h4>
           <p>Barangay Secretary</p>
         </div>
         <div class="official spaced">
@@ -178,18 +192,18 @@
       </div>
       <div class="top-kagawads">
         <div class="official">
-          <img src="img/captain.png" alt="" />
-          <h4>Art Laurence Siojo</h4>
+          <img src="img/dave-pic.png" alt="" />
+          <h4>Humprey dave Coso</h4>
           <p>Barangay Kagawad</p>
         </div>
         <div class="official">
           <img src="img/captainb 2.png" alt="" />
-          <h4>Kinghazym mundiz</h4>
+          <h4>Kinghazzym Mundiz</h4>
           <p>Barangay Kagawad</p>
         </div>
         <div class="official">
-          <img src="img/captain.png" alt="" />
-          <h4>Art Laurence Siojo</h4>
+          <img src="img/fyne-shiii.png" alt="" />
+          <h4>Fiona Cawaling</h4>
           <p>Barangay Kagawad</p>
         </div>
         <div class="official">
@@ -200,18 +214,18 @@
       </div>
       <div class="kagawads">
         <div class="official">
+          <img src="img/chied-pic.png" alt="" />
+          <h4>Chied yusof mapuro</h4>
+          <p>Barangay Kagawad</p>
+        </div>
+        <div class="official">
           <img src="img/dave-pic.png" alt="" />
-          <h4>Hamprey Dave Coso</h4>
+          <h4>Humprey dave coso</h4>
           <p>Barangay Kagawad</p>
         </div>
         <div class="official">
-          <img src="img/captainb 2.png" alt="" />
-          <h4>Kinghazym mundiz</h4>
-          <p>Barangay Kagawad</p>
-        </div>
-        <div class="official">
-          <img src="img/fyne-shiii.png" alt="" />
-          <h4>Fiona Cawaling</h4>
+          <img src="img/captain.png" alt="" />
+          <h4>Art Laurence Siojo</h4>
           <p>Barangay Kagawad</p>
         </div>
       </div>
@@ -236,5 +250,22 @@
 
     <script type="module" src="landingPage.js"></script>
     <script src="loader.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const hamburgerMenu = document.querySelector(".hamburger-menu");
+        const sidebar = document.querySelector(".sidebar");
+        const exitbutton = document.querySelector(".exit-btn");
+
+        if (hamburgerMenu && sidebar && exitbutton) {
+          hamburgerMenu.addEventListener("click", () => {
+            sidebar.classList.add("open");
+          });
+
+          exitbutton.addEventListener("click", () => {
+            sidebar.classList.remove("open");
+          });
+        }
+      });
+    </script>
   </body>
 </html>

@@ -19,6 +19,7 @@ body {
   height: 860px;
   position: relative;
 }
+
 .hero {
   display: flex;
   flex-direction: row;
@@ -127,9 +128,7 @@ section svg {
 .sect2-text button {
   background-color: #ffeb00;
   color: #6ec207;
-  padding: 6px;
-  padding-left: 22px;
-  padding-right: 22px;
+  padding: 6px 22px;
   margin-top: 31px;
   font-size: 16px;
   font-weight: bold;
@@ -157,48 +156,84 @@ section svg {
 .whyChoose-container {
   background-color: #6ec207;
   width: 100%;
-  height: 674px;
+  min-height: 674px;
   position: relative;
 }
 .why-choose {
-  width: 1200px;
-  justify-self: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
   display: flex;
   color: white;
-  gap: 100px;
-  padding-top: 63px;
+  gap: 40px;
+  padding: 63px 20px;
+  flex-wrap: wrap;
+  align-items: center;
 }
+.why-choose-img {
+  flex: 1;
+  min-width: 300px;
+  max-width: 500px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.why-choose-img img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
 .why-choose-text {
-  width: 568px;
+  flex: 1;
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
 }
+
 .why-choose-text h2 {
   font-size: 64px;
   font-weight: bold;
-  width: 568px;
-  height: 80px;
   margin-bottom: 70px;
 }
+
 .chooseUs-items {
-  font-size: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
 }
+
 .why-choose-item {
   display: flex;
-  width: 485px;
   align-items: center;
-  gap: 25px;
-  margin-bottom: 39px;
+  gap: 20px;
+  width: 100%;
+  max-width: 485px;
 }
-.why-choose-item i {
-  position: absolute;
-  margin-left: 33px;
-  color: black;
-  font-size: 54px;
-}
+
 .circle {
-  width: 117px;
-  height: 117px;
-  background-color: #fcff00;
-  border-radius: 100%;
+  width: 60px;
+  height: 60px;
+  background-color: #ffeb00;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.why-choose-item i {
+  font-size: 30px;
+  color: #6ec207;
+}
+
+.why-choose-item h3 {
+  font-size: 24px;
+  font-weight: 500;
+  margin: 0;
+  line-height: 1.2;
 }
 /*--------------------------freedom wall------------------------------------*/
 .freedomWall-slider {
@@ -207,7 +242,7 @@ section svg {
   background-color: white;
   border-radius: 10px;
   margin: 20px auto;
-  max-width: 1000px; /* Maximum width of the section */
+  max-width: 1000px;
 }
 .freedomWall-slider h2 {
   font-size: 48px;
@@ -230,8 +265,10 @@ section svg {
 }
 
 .post-box {
-  width: 900px;
-  height: 195px;
+  width: 100%;
+  max-width: 900px;
+  height: auto;
+  min-height: 195px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -252,25 +289,34 @@ section svg {
 }
 /*------------------ freedom wall input ------------------*/
 .post-in-freedomWall {
-  width: 1300px;
-  height: 115px;
-  justify-self: center;
+  width: 100%;
+  max-width: 1300px;
+  height: auto;
+  min-height: 115px;
+  margin: 0 auto;
   text-align: center;
+  padding: 0 20px;
 }
 .post-freedomWall-text {
-  width: 445px;
-  height: 30px;
-  justify-self: center;
+  width: 100%;
+  max-width: 445px;
+  height: auto;
+  margin: 0 auto;
+}
+.post-freedomWall-input {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
 }
 .post-freedomWall-input input {
-  width: 1000px;
+  width: 100%;
+  max-width: 1000px;
   height: 50px;
   background-color: #f9f9f9;
   border-radius: 10px;
   box-shadow: 8px 7px 18px -3px rgba(0, 0, 0, 0.75);
-  -webkit-box-shadow: 8px 7px 18px -3px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 8px 7px 18px -3px rgba(0, 0, 0, 0.75);
-  margin-right: 10px;
   padding: 10px;
   box-sizing: border-box;
 }
@@ -282,8 +328,6 @@ section svg {
   font-weight: bold;
   border-radius: 10px;
   box-shadow: 8px 7px 18px -3px rgba(0, 0, 0, 0.75);
-  -webkit-box-shadow: 8px 7px 18px -3px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 8px 7px 18px -3px rgba(0, 0, 0, 0.75);
 }
 .post-freedomWall-input button:hover {
   background-color: #6ec207;
@@ -291,7 +335,8 @@ section svg {
   transition: 0.3s;
 }
 #freedomWallForm {
-  height: 80px;
+  height: auto;
+  min-height: 80px;
 }
 /*------------------ Media Queries for Responsiveness ------------------*/
 
@@ -415,7 +460,7 @@ section svg {
   opacity: 0;
   transform: translateX(20px);
   transition: all 0.8s ease-in-out;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 4px;
 }
 
@@ -426,7 +471,7 @@ section svg {
 }
 
 #toast.success {
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
 }
 
@@ -436,11 +481,483 @@ section svg {
 }
 
 #toast.info {
-  background-color: #2196F3;
+  background-color: #2196f3;
   color: white;
 }
 
 #toast.warning {
   background-color: #ff9800;
   color: white;
+}
+
+/* Responsive styles for tablet and mobile */
+@media (max-width: 768px) {
+  /* Events section */
+  .event-hero {
+    height: 200px;
+  }
+
+  .event-hero h1 {
+    font-size: 48px;
+  }
+
+  .event-section-box {
+    padding: 15px;
+  }
+
+  .post-box {
+    width: 100%;
+    height: auto;
+    min-height: 150px;
+    padding: 15px;
+    margin: 10px 0;
+  }
+
+  /* About Us section */
+  .top {
+    height: 200px;
+  }
+
+  .text-top {
+    font-size: 48px;
+  }
+
+  .about-content {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .about-text {
+    width: 100%;
+    margin-bottom: 30px;
+  }
+
+  .about-text h2 {
+    font-size: 32px;
+  }
+
+  .about-text p {
+    font-size: 16px;
+  }
+
+  .about-img {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
+  /* Barangay Officials section */
+  .officials-container {
+    padding: 20px;
+  }
+
+  .officials-title {
+    font-size: 32px;
+    margin-bottom: 30px;
+  }
+
+  .top-kagawads,
+  .kagawads {
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+  }
+
+  .official {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .official img {
+    width: 150px;
+    height: 150px;
+  }
+
+  .official h4 {
+    font-size: 18px;
+  }
+
+  .official p {
+    font-size: 14px;
+  }
+
+  .why-choose-item {
+    gap: 15px;
+  }
+
+  .circle {
+    width: 90px;
+    height: 90px;
+  }
+
+  .why-choose-item i {
+    font-size: 40px;
+  }
+
+  .why-choose-item h3 {
+    font-size: 24px;
+  }
+}
+
+/* Mobile specific styles */
+@media (max-width: 375px) {
+  /* Events section */
+  .event-hero h1 {
+    font-size: 36px;
+  }
+
+  .post-box {
+    padding: 10px;
+  }
+
+  /* About Us section */
+  .text-top {
+    font-size: 36px;
+  }
+
+  .about-text h2 {
+    font-size: 28px;
+  }
+
+  .about-text p {
+    font-size: 14px;
+  }
+
+  /* Barangay Officials section */
+  .officials-title {
+    font-size: 28px;
+  }
+
+  .official {
+    max-width: 250px;
+  }
+
+  .official img {
+    width: 120px;
+    height: 120px;
+  }
+
+  .official h4 {
+    font-size: 16px;
+  }
+
+  .official p {
+    font-size: 12px;
+  }
+
+  .why-choose-item {
+    gap: 8px;
+  }
+
+  .circle {
+    width: 60px;
+    height: 60px;
+  }
+
+  .why-choose-item i {
+    font-size: 28px;
+  }
+
+  .why-choose-item h3 {
+    font-size: 18px;
+  }
+}
+
+/* Responsive styles */
+@media (max-width: 1200px) {
+  .hero-text h1 {
+    font-size: 120px;
+  }
+
+  .why-choose-text h2 {
+    font-size: 48px;
+  }
+
+  .chooseUs-items {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 992px) {
+  .hero-container {
+    height: auto;
+    min-height: 600px;
+  }
+
+  .hero {
+    flex-direction: column;
+    text-align: center;
+    padding: 60px 20px;
+  }
+
+  .hero-text {
+    text-align: center;
+  }
+
+  .hero-text h1 {
+    font-size: 100px;
+  }
+
+  .hero-text p {
+    margin: 0 auto 30px;
+  }
+
+  .sect2 {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .sect2-text {
+    text-align: center;
+  }
+
+  .sect2-text p {
+    margin: 0 auto;
+  }
+
+  .why-choose {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .why-choose-text {
+    text-align: center;
+  }
+
+  .why-choose-text h2 {
+    width: 100%;
+    height: auto;
+  }
+
+  .why-choose-img {
+    max-width: 400px;
+    margin-bottom: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-text h1 {
+    font-size: 80px;
+  }
+
+  .hero-text p {
+    font-size: 20px;
+  }
+
+  .sect2-text h2 {
+    font-size: 36px;
+  }
+
+  .why-choose-text h2 {
+    font-size: 40px;
+  }
+
+  .chooseUs-items {
+    font-size: 24px;
+  }
+
+  .why-choose-item {
+    gap: 15px;
+  }
+
+  .circle {
+    width: 90px;
+    height: 90px;
+  }
+
+  .why-choose-item i {
+    font-size: 40px;
+  }
+
+  .why-choose-item h3 {
+    font-size: 24px;
+  }
+
+  .freedomWall-slider h2 {
+    font-size: 36px;
+  }
+
+  .post-box {
+    padding: 15px;
+  }
+
+  .why-choose-img {
+    max-width: 350px;
+  }
+}
+
+@media (max-width: 576px) {
+  .hero-text h1 {
+    font-size: 60px;
+  }
+
+  .hero-text p {
+    font-size: 18px;
+  }
+
+  .hero-text button {
+    padding: 10px 20px;
+  }
+
+  .sect2-text h2 {
+    font-size: 32px;
+  }
+
+  .sect2-text p {
+    font-size: 14px;
+  }
+
+  .why-choose-text h2 {
+    font-size: 32px;
+  }
+
+  .chooseUs-items {
+    font-size: 20px;
+  }
+
+  .circle {
+    width: 70px;
+    height: 70px;
+  }
+
+  .why-choose-item i {
+    font-size: 32px;
+  }
+
+  .why-choose-item h3 {
+    font-size: 20px;
+  }
+
+  .freedomWall-slider h2 {
+    font-size: 28px;
+  }
+
+  .post-freedomWall-input input {
+    height: 45px;
+  }
+
+  .post-freedomWall-input button {
+    width: 90px;
+    height: 45px;
+  }
+
+  .why-choose-img {
+    max-width: 300px;
+  }
+}
+
+@media (max-width: 375px) {
+  .hero-text h1 {
+    font-size: 48px;
+  }
+
+  .hero-text p {
+    font-size: 16px;
+  }
+
+  .sect2-text h2 {
+    font-size: 28px;
+  }
+
+  .why-choose-text h2 {
+    font-size: 28px;
+  }
+
+  .chooseUs-items {
+    font-size: 18px;
+  }
+
+  .circle {
+    width: 60px;
+    height: 60px;
+  }
+
+  .why-choose-item i {
+    font-size: 28px;
+  }
+
+  .why-choose-item h3 {
+    font-size: 18px;
+  }
+
+  .freedomWall-slider h2 {
+    font-size: 24px;
+  }
+
+  .post-box {
+    padding: 10px;
+  }
+
+  .post-freedomWall-input input {
+    height: 40px;
+  }
+
+  .post-freedomWall-input button {
+    width: 80px;
+    height: 40px;
+  }
+}
+
+.service {
+  width: 100%;
+  max-width: 300px;
+  height: 300px;
+  perspective: 1000px;
+  margin: 0 auto;
+}
+
+.service-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.service-front,
+.service-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.service-front {
+  background-color: #6ec207;
+  color: white;
+}
+
+.service-back {
+  background-color: #ffeb00;
+  color: #6ec207;
+  transform: rotateY(180deg);
+}
+
+/* Desktop hover effect */
+@media (min-width: 992px) {
+  .service:hover .service-inner {
+    transform: rotateY(180deg);
+  }
+}
+
+/* Mobile and tablet click effect */
+@media (max-width: 991px) {
+  .service {
+    cursor: pointer;
+  }
+
+  .service.flipped .service-inner {
+    transform: rotateY(180deg);
+  }
+
+  .service:hover .service-inner {
+    transform: none;
+  }
 }

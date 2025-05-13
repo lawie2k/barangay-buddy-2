@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="navbar.css" />
     <link rel="stylesheet" href="landingPage.css" />
     <link rel="stylesheet" href="loader.css" />
+    <link rel="stylesheet" href="footer.css" />
     <link rel="icon" href="img/Big Logo 1.png" type="image/x-icon" />
     <title>Barangay Officials</title>
   </head>
@@ -68,11 +69,11 @@
               ></a>
               <ul class="brgy-officials">
                 <li>
-                  <a href="officials-brgy-kingking.html">brgy. kingking</a>
+                  <a href="officials-brgy-kingking.html">Brgy. Kingking</a>
                 </li>
-                <li><a href="officials-brgy-magnaga.html">brgy. magnaga</a></li>
+                <li><a href="officials-brgy-magnaga.html">Brgy. Magnaga</a></li>
                 <li>
-                  <a href="officials-brgy-napnapan.html">brgy. napnapan</a>
+                  <a href="officials-brgy-napnapan.html">Brgy. Napnapan</a>
                 </li>
               </ul>
             </li>
@@ -120,9 +121,9 @@
               >Brgy. Officials <i class="fa-solid fa-caret-down"></i
             ></a>
             <ul>
-              <li><a href="officials-brgy-kingking.html">brgy. kingking</a></li>
-              <li><a href="officials-brgy-magnaga.html">brgy. magnaga</a></li>
-              <li><a href="officials-brgy-napnapan.html">brgy. napnapan</a></li>
+              <li><a href="officials-brgy-kingking.html">Brgy. Kingking</a></li>
+              <li><a href="officials-brgy-magnaga.html">Brgy. Magnaga</a></li>
+              <li><a href="officials-brgy-napnapan.html">Brgy. Napnapan</a></li>
             </ul>
           </li>
           <li><a href="events.html">Events</a></li>
@@ -149,7 +150,7 @@
           <div class="pics">
             <img src="img/kingking.jpg" alt="Kingking Logo" />
           </div>
-          <div class="pics official">
+          <div class="pics-official">
             <img
               class="cap-pic"
               src="img/captainb 2.png"
@@ -179,17 +180,17 @@
       <div class="top-kagawads">
         <div class="official">
           <img src="img/dave-pic.png" alt="" />
-          <h4>Humprey dave coso</h4>
+          <h4>Humprey dave Coso</h4>
           <p>Barangay Kagawad</p>
         </div>
         <div class="official">
           <img src="img/chied-pic.png" alt="" />
-          <h4>Chied yusof mapuro</h4>
+          <h4>Chied yusof Mapuro</h4>
           <p>Barangay Kagawad</p>
         </div>
         <div class="official">
           <img src="img/fyne-shiii.png" alt="" />
-          <h4>Fiona cawaling</h4>
+          <h4>Fiona Cawaling</h4>
           <p>Barangay Kagawad</p>
         </div>
         <div class="official">
@@ -201,12 +202,12 @@
       <div class="kagawads">
         <div class="official">
           <img src="img/chied-pic.png" alt="" />
-          <h4>Chied yusof mapuro</h4>
+          <h4>Chied yusof Mapuro</h4>
           <p>Barangay Kagawad</p>
         </div>
         <div class="official">
           <img src="img/dave-pic.png" alt="" />
-          <h4>Humprey dave coso</h4>
+          <h4>Humprey dave Coso</h4>
           <p>Barangay Kagawad</p>
         </div>
         <div class="official">
@@ -234,5 +235,18 @@
       <div class="loader"></div>
     </div>
     <script src="loader.js"></script>
+    <script>
+      const hamburgerMenu = document.querySelector(".hamburger-menu");
+      const sidebar = document.querySelector(".sidebar");
+      const exitbutton = document.querySelector(".exit-btn");
+
+      hamburgerMenu.addEventListener("click", () => {
+        sidebar.classList.toggle("open");
+      });
+
+      exitbutton.addEventListener("click", () => {
+        sidebar.classList.remove("open");
+      });
+    </script>
   </body>
 </html>

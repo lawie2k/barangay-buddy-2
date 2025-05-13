@@ -68,11 +68,11 @@
               ></a>
               <ul class="brgy-officials">
                 <li>
-                  <a href="officials-brgy-kingking.html">brgy. kingking</a>
+                  <a href="officials-brgy-kingking.html">Brgy. Kingking</a>
                 </li>
-                <li><a href="officials-brgy-magnaga.html">brgy. magnaga</a></li>
+                <li><a href="officials-brgy-magnaga.html">Brgy. Magnaga</a></li>
                 <li>
-                  <a href="officials-brgy-napnapan.html">brgy. napnapan</a>
+                  <a href="officials-brgy-napnapan.html">Brgy. Napnapan</a>
                 </li>
               </ul>
             </li>
@@ -119,10 +119,10 @@
             <a href=""
               >Brgy. Officials <i class="fa-solid fa-caret-down"></i
             ></a>
-            <ul>
-              <li><a href="officials-brgy-kingking.html">brgy. kingking</a></li>
-              <li><a href="officials-brgy-magnaga.html">brgy. magnaga</a></li>
-              <li><a href="officials-brgy-napnapan.html">brgy. napnapan</a></li>
+            <ul class="side-dropdown">
+              <li><a href="officials-brgy-kingking.html">Brgy. Kingking</a></li>
+              <li><a href="officials-brgy-magnaga.html">Brgy. Magnaga</a></li>
+              <li><a href="officials-brgy-napnapan.html">Brgy. Napnapan</a></li>
             </ul>
           </li>
           <li><a href="events.html">Events</a></li>
@@ -149,13 +149,13 @@
           <div class="pics">
             <img src="img/kingking.jpg" alt="Kingking Logo" />
           </div>
-          <div class="pics official">
+          <div class="pics-official">
             <img
               class="cap-pic"
               src="img/dave-pic.png"
               alt="Barangay Captain"
             />
-            <h2>Hamprey Dave Coso</h2>
+            <h2>Humprey dave Coso</h2>
             <p>Barangay Captain</p>
           </div>
           <div class="pics">
@@ -171,12 +171,22 @@
           <p>Barangay Secretary</p>
         </div>
         <div class="official spaced">
-          <img src="img/chied-pic.png" alt="Treasurer" />
-          <h4>Chied Yusof P Mapuro</h4>
+          <img src="img/ash-pic.png" alt="Treasurer" />
+          <h4>Ashton Rosello</h4>
           <p>Barangay Treasurer</p>
         </div>
       </div>
       <div class="top-kagawads">
+        <div class="official">
+          <img src="img/captain.png" alt="" />
+          <h4>Art laurence Siojo</h4>
+          <p>Barangay Kagawad</p>
+        </div>
+        <div class="official">
+          <img src="img/chied-pic.png" alt="" />
+          <h4>Chied yusof Mapuro</h4>
+          <p>Barangay Kagawad</p>
+        </div>
         <div class="official">
           <img src="img/fyne-shiii.png" alt="" />
           <h4>Fiona Cawaling</h4>
@@ -187,31 +197,21 @@
           <h4>Ashton Rosello</h4>
           <p>Barangay Kagawad</p>
         </div>
-        <div class="official">
-          <img src="img/captain.png" alt="" />
-          <h4>Art Laurence Siojo</h4>
-          <p>Barangay Kagawad</p>
-        </div>
-        <div class="official">
-          <img src="img/captainb 2.png" alt="" />
-          <h4>King hazzym Mundiz</h4>
-          <p>Barangay Kagawad</p>
-        </div>
       </div>
       <div class="kagawads">
         <div class="official">
           <img src="img/chied-pic.png" alt="" />
-          <h4>Chied Yusof P Mapuro</h4>
+          <h4>Chied yusof Mapuro</h4>
           <p>Barangay Kagawad</p>
         </div>
         <div class="official">
-          <img src="img/dave-pic.png" alt="" />
-          <h4>Hamrpey Dave Coso</h4>
+          <img src="img/captainb 2.png" alt="" />
+          <h4>Kinghazzym Mundiz</h4>
           <p>Barangay Kagawad</p>
         </div>
         <div class="official">
-          <img src="img/ash-pic.png" alt="" />
-          <h4>ashton Rosello</h4>
+          <img src="img/captain.png" alt="" />
+          <h4>Art Laurence Siojo</h4>
           <p>Barangay Kagawad</p>
         </div>
       </div>
@@ -236,5 +236,22 @@
 
     <script type="module" src="landingPage.js"></script>
     <script src="loader.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const hamburgerMenu = document.querySelector(".hamburger-menu");
+        const sidebar = document.querySelector(".sidebar");
+        const exitbutton = document.querySelector(".exit-btn");
+
+        if (hamburgerMenu && sidebar && exitbutton) {
+          hamburgerMenu.addEventListener("click", () => {
+            sidebar.classList.add("open");
+          });
+
+          exitbutton.addEventListener("click", () => {
+            sidebar.classList.remove("open");
+          });
+        }
+      });
+    </script>
   </body>
 </html>

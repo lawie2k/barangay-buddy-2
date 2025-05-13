@@ -19,124 +19,204 @@
 }
 .hero {
   width: 100%;
-  height: 500px;
+  min-height: 500px;
+  padding: 40px 20px;
 }
 .hero-items {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-self: center;
-  gap: 327px;
-  padding-top: 80px;
+  justify-content: center;
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  flex-wrap: wrap;
 }
 .hero-text {
-  width: 611px;
-  height: 330px;
+  width: 100%;
+  max-width: 611px;
+  height: auto;
+  text-align: center;
 }
 .hero-text h2 {
-  font-size: 70px;
+  font-size: clamp(36px, 5vw, 70px);
   font-weight: bold;
-  line-height: 102%;
+  line-height: 1.2;
   padding-top: 30px;
 }
 .hero-text p {
-  font-size: 20px;
+  font-size: clamp(16px, 2vw, 20px);
+  line-height: 1.6;
+}
+.hero-img {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  margin: 0 auto;
+  order: -1;
+}
+.hero-img img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
 }
 .mission {
   width: 100%;
-  height: 450px;
+  min-height: 450px;
   background-color: #6ec207;
   text-align: center;
+  padding: 40px 20px;
 }
 .mission-text {
   color: white;
-  justify-self: center;
-  padding-top: 45px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
 }
 .mission-text i {
-  font-size: 84px;
+  font-size: clamp(48px, 6vw, 84px);
   margin-bottom: 10px;
 }
 .mission-text h2 {
-  font-size: 70px;
+  font-size: clamp(36px, 5vw, 70px);
   font-weight: bold;
-  line-height: 102%;
-  margin-bottom: 10px;
+  line-height: 1.2;
+  margin-bottom: 20px;
 }
 .mission-text p {
-  width: 400px;
-  justify-self: center;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  font-size: clamp(16px, 2vw, 20px);
+  line-height: 1.6;
 }
 .team {
   width: 100%;
-  height: 700px;
+  min-height: 700px;
+  padding: 40px 20px;
 }
 .team-items {
-  justify-self: center;
+  max-width: 1200px;
+  margin: 0 auto;
   text-align: center;
-  padding-top: 120px;
+  padding: 40px 20px;
 }
 .team-text h2 {
-  font-size: 70px;
+  font-size: clamp(36px, 5vw, 70px);
+  margin-bottom: 20px;
 }
 .team-text p {
-  font-size: 20px;
-  width: 670px;
-  justify-self: center;
-  margin-bottom: 30px;
+  font-size: clamp(16px, 2vw, 20px);
+  width: 100%;
+  max-width: 670px;
+  margin: 0 auto 30px;
+  line-height: 1.6;
 }
 .team-pics {
   display: flex;
+  flex-wrap: wrap;
   gap: 35px;
-  width: 1200px;
+  justify-content: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.team-pics img {
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  transition: transform 0.8s ease-out;
 }
 .team-pics img:hover {
   transform: translate(-5px, -10px);
-  transition: 0.8s ease-out;
-}
-.team-pics .team-pics img:after {
-  transform: translate(-3px, -5px);
-  transition: 0.8s ease-out;
-}
-footer {
-  background-color: #6ec207;
-  color: white;
-  padding: 20px; /* Adjust overall footer padding */
-  text-align: center; /* Center footer content */
-  box-sizing: border-box;
-  width: 100%;
 }
 
-.footer-items {
-  display: flex;
-  flex-wrap: wrap; /* Allow items to wrap on smaller screens */
-  justify-content: space-between; /* Distribute space between items */
-  align-items: center;
-  gap: 20px; /* Adjust gap between footer items */
-  max-width: 1200px; /* Limit maximum width of footer items */
-  margin: 0 auto; /* Center footer items */
+@media (max-width: 992px) {
+  .hero-items {
+    gap: 20px;
+  }
+
+  .mission-text {
+    padding: 20px;
+  }
+
+  .team-pics {
+    gap: 20px;
+  }
 }
 
-.footer-icons {
-  font-size: 1em;
-  display: flex;
-  align-items: center;
+@media (max-width: 768px) {
+  .top {
+    height: auto;
+    padding: 40px 20px;
+  }
+
+  .text-top {
+    font-size: clamp(36px, 8vw, 70px);
+    padding-top: 20px;
+  }
+
+  .hero-items {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero-text {
+    text-align: center;
+  }
+
+  .mission-text p {
+    padding: 0 20px;
+  }
+
+  .team-pics img {
+    max-width: 150px;
+  }
+
+  .hero-img {
+    max-width: 250px;
+  }
 }
 
-.footer-icons a {
-  color: white;
-  margin-left: 15px;
-  text-decoration: none; /* Remove underlines from links */
+@media (max-width: 576px) {
+  .hero-text h2,
+  .mission-text h2,
+  .team-text h2 {
+    font-size: 32px;
+  }
+
+  .hero-text p,
+  .mission-text p,
+  .team-text p {
+    font-size: 16px;
+  }
+
+  .team-pics img {
+    max-width: 120px;
+  }
+
+  .hero-img {
+    max-width: 200px;
+  }
 }
 
-.footer-icons a:hover {
-  color: #ffeb00;
-}
+@media (max-width: 375px) {
+  .hero-text h2,
+  .mission-text h2,
+  .team-text h2 {
+    font-size: 28px;
+  }
 
-.footer-icons i {
-  font-size: 1.5em;
-  margin-right: 5px;
-}
+  .hero-text p,
+  .mission-text p,
+  .team-text p {
+    font-size: 14px;
+  }
 
-.footer-allRights {
-  font-size: 0.9em;
+  .team-pics img {
+    max-width: 100px;
+  }
+
+  .hero-img {
+    max-width: 180px;
+  }
 }

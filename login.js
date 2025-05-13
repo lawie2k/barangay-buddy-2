@@ -84,9 +84,29 @@ createButton.addEventListener("click", function (event) {
 const loginEmail = document.getElementById("email");
 const loginPass = document.getElementById("password");
 const loginBtn = document.getElementById("login-btn");
+const loaderWrapper = document.querySelector(".loader-wrapper");
+
+// Function to show loader
+function showLoader() {
+  loaderWrapper.style.display = "flex";
+  loaderWrapper.style.opacity = "1";
+  loaderWrapper.style.pointerEvents = "auto";
+}
+
+// Function to hide loader
+function hideLoader() {
+  loaderWrapper.style.opacity = "0";
+  loaderWrapper.style.pointerEvents = "none";
+  setTimeout(() => {
+    loaderWrapper.style.display = "none";
+  }, 500);
+}
 
 loginBtn.addEventListener("click", function (event) {
   event.preventDefault();
+  
+  // Show loader immediately
+  showLoader();
 
   signInWithEmailAndPassword(auth, loginEmail.value, loginPass.value)
     .then((userCredential) => {
@@ -99,28 +119,40 @@ loginBtn.addEventListener("click", function (event) {
         .then((snapshot) => {
           if (snapshot.exists()) {
             const barangay = snapshot.val().barangay;
+            let redirectUrl = "";
 
-            // Redirect based on barangay
+            // Set redirect URL based on barangay
             if (barangay === "kingking") {
-              window.location.href = "barangay-kingking-admin.html";
+              redirectUrl = "barangay-kingking-admin.html";
             } else if (barangay === "magnaga") {
-              window.location.href = "barangay-magnaga-admin.html";
+              redirectUrl = "barangay-magnaga-admin.html";
             } else if (barangay === "napnapan") {
-              window.location.href = "barangay-napnapan-admin.html";
+              redirectUrl = "barangay-napnapan-admin.html";
             } else if (barangay === "fuentes") {
-              window.location.href = "barangay-fuentes-admin.html";
+              redirectUrl = "barangay-fuentes-admin.html";
+            }
+
+            if (redirectUrl) {
+              // Add a small delay before redirecting to ensure loader is visible
+              setTimeout(() => {
+                window.location.href = redirectUrl;
+              }, 1000);
             } else {
+              hideLoader();
               alert("No specific landing page for barangay: " + barangay);
             }
           } else {
+            hideLoader();
             alert("No user data found.");
           }
         })
         .catch((error) => {
+          hideLoader();
           console.error("Error fetching user data:", error);
         });
     })
     .catch((error) => {
+      hideLoader();
       alert("Login failed: " + error.message);
     });
 });

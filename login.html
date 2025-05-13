@@ -21,6 +21,18 @@
     <title>Login</title>
   </head>
   <body>
+    <div class="loader-wrapper">
+      <div class="loader"></div>
+    </div>
+
+    <div class="mobile-restriction">
+      <div class="mobile-restriction-content">
+        <i class="fa-solid fa-desktop"></i>
+        <h2>Desktop Only</h2>
+        <p>For security reasons, the admin login is only available on desktop devices. Please access this page from a computer to log in.</p>
+      </div>
+    </div>
+
     <div class="admin-signup" style="display: none" id="signupform">
       <button>
         <i id="back-btn" class="fa-solid fa-arrow-left"></i>
@@ -280,11 +292,35 @@
       </svg>
     </div>
 
-    <div class="loader-wrapper">
-      <div class="loader"></div>
-    </div>
-
     <script type="module" src="login.js" defer></script>
     <script src="loader.js"></script>
+    <script>
+      // Check if device is mobile
+      function isMobile() {
+        return window.innerWidth <= 768;
+      }
+
+      // Function to handle mobile restriction
+      function handleMobileRestriction() {
+        const mobileRestriction = document.querySelector('.mobile-restriction');
+        const loginForm = document.getElementById('loginform');
+        const signupForm = document.getElementById('signupform');
+
+        if (isMobile()) {
+          mobileRestriction.style.display = 'flex';
+          loginForm.style.display = 'none';
+          signupForm.style.display = 'none';
+        } else {
+          mobileRestriction.style.display = 'none';
+          loginForm.style.display = 'block';
+        }
+      }
+
+      // Initial check
+      handleMobileRestriction();
+
+      // Check on window resize
+      window.addEventListener('resize', handleMobileRestriction);
+    </script>
   </body>
 </html>

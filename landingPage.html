@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="services.css">
     <link rel="stylesheet" href="loader.css">
     <link rel="stylesheet" href="toast.css">
+    <link rel="stylesheet" href="why-choose.css">
     <link rel="icon" href="img/Big Logo 1.png" type="image/x-icon">
     <title>Barangay buddy</title>
   </head>
@@ -116,7 +117,7 @@
             <a href=""
               >Brgy. Officials <i class="fa-solid fa-caret-down"></i
             ></a>
-            <ul>
+            <ul class="side-dropdown">
               <li><a href="officials-brgy-kingking.html">brgy. kingking</a></li>
               <li><a href="officials-brgy-magnaga.html">brgy. magnaga</a></li>
               <li><a href="officials-brgy-napnapan.html">brgy. napnapan</a></li>
@@ -256,18 +257,21 @@
           <h2>Why Choose Us?</h2>
           <div class="chooseUs-items">
             <div class="why-choose-item">
-              <i class="fa-solid fa-lock"></i>
-              <div class="circle"></div>
+              <div class="circle">
+                <i class="fa-solid fa-lock"></i>
+              </div>
               <h3>Secure and Reliable</h3>
             </div>
             <div class="why-choose-item">
-              <i class="fa-solid fa-clock"></i>
-              <div class="circle"></div>
+              <div class="circle">
+                <i class="fa-solid fa-clock"></i>
+              </div>
               <h3>Time Saving</h3>
             </div>
             <div class="why-choose-item">
-              <i class="fa-solid fa-circle-check"></i>
-              <div class="circle"></div>
+              <div class="circle">
+                <i class="fa-solid fa-circle-check"></i>
+              </div>
               <h3>Convenience</h3>
             </div>
           </div>
@@ -424,6 +428,30 @@
           }, 500);
         }, 3000);
       }
+    </script>
+
+    <script>
+      // Service card click functionality
+      document.addEventListener('DOMContentLoaded', function() {
+        const services = document.querySelectorAll('.services-card');
+        
+        services.forEach(service => {
+          service.addEventListener('click', function() {
+            // Only handle clicks on mobile/tablet
+            if (window.innerWidth <= 991) {
+              // Remove flipped class from all other services
+              services.forEach(s => {
+                if (s !== service) {
+                  s.classList.remove('flipped');
+                }
+              });
+              
+              // Toggle flipped class on clicked service
+              this.classList.toggle('flipped');
+            }
+          });
+        });
+      });
     </script>
   </body>
 </html>

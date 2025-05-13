@@ -116,7 +116,7 @@
             <a href=""
               >Brgy. Officials <i class="fa-solid fa-caret-down"></i
             ></a>
-            <ul>
+            <ul class="side-dropdown">
               <li><a href="officials-brgy-kingking.html">brgy. kingking</a></li>
               <li><a href="officials-brgy-magnaga.html">brgy. magnaga</a></li>
               <li><a href="officials-brgy-napnapan.html">brgy. napnapan</a></li>
@@ -241,5 +241,18 @@
     <script src="loader.js"></script>
     <script type="module" src="formsubmit.js"></script>
     <script src="landingPage.js"></script>
+    <script>
+      const hamburgerMenu = document.querySelector(".hamburger-menu");
+      const sidebar = document.querySelector(".sidebar");
+      const exitbutton = document.querySelector(".exit-btn");
+
+      hamburgerMenu.addEventListener("click", () => {
+        sidebar.classList.toggle("open");
+      });
+
+      exitbutton.addEventListener("click", () => {
+        sidebar.classList.remove("open");
+      });
+    </script>
   </body>
 </html>

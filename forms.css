@@ -10,7 +10,6 @@ body {
   width: 100%;
   height: 150px;
   color: white;
-  background: #111e83;
   background: #6ec207;
 }
 .hero-text {
@@ -19,65 +18,99 @@ body {
   padding-top: 25px;
 }
 .hero-text h2 {
-  font-size: 28px;
+  font-size: clamp(20px, 4vw, 28px);
 }
 .hero-text h1 {
-  font-size: 64px;
+  font-size: clamp(36px, 8vw, 64px);
 }
 .form-box {
-  width: 1500px;
-  height: 785px;
-  justify-self: center;
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 20px;
 }
 .input {
-  width: 450px;
+  width: 100%;
+  max-width: 450px;
   height: 40px;
+  padding: 0 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
-.form1 {
+.form1, .form2, .form3, .form4 {
   display: flex;
-  gap: 75px;
-  padding-top: 73px;
+  gap: 20px;
+  padding-top: 30px;
+  flex-wrap: wrap;
 }
-.form2 {
-  display: flex;
-  gap: 75px;
-  padding-top: 58px;
-}
-.form3 {
-  display: flex;
-  gap: 75px;
-  padding-top: 58px;
-}
-.form4 {
-  display: flex;
-  gap: 75px;
-  padding-top: 58px;
+.form1 > div, .form2 > div, .form3 > div, .form4 > div {
+  flex: 1;
+  min-width: 250px;
 }
 .email-form {
-  margin-top: 58px;
+  margin-top: 30px;
 }
 .input-email {
-  width: 1500px;
+  width: 100%;
   height: 40px;
+  padding: 0 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 .submit-btn {
   margin-top: 20px;
+  text-align: center;
 }
 .submit-btn button {
   background-color: #ffeb00;
   color: #6ec207;
-  font-size: 20px;
+  font-size: clamp(16px, 2vw, 20px);
   font-weight: bold;
-  padding: 10px;
-  padding-left: 25px;
-  padding-right: 25px;
-  border-style: solid;
+  padding: 10px 25px;
   border: 0;
   border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 .submit-btn button:hover {
   background-color: #6ec207;
   color: #ffeb00;
-  transition: 0.3s;
-  cursor: pointer;
+}
+/* Media Queries */
+@media screen and (max-width: 1200px) {
+  .form-box {
+    padding: 20px;
+  }
+  
+  .input {
+    max-width: 100%;
+  }
+}
+@media screen and (max-width: 768px) {
+  .form1, .form2, .form3, .form4 {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .form1 > div, .form2 > div, .form3 > div, .form4 > div {
+    width: 100%;
+  }
+  
+  .input, .input-email {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 480px) {
+  .hero {
+    height: auto;
+    padding: 20px 0;
+  }
+  
+  .form-box {
+    padding: 15px;
+  }
+  
+  .submit-btn button {
+    width: 100%;
+  }
 }
