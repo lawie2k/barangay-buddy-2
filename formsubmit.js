@@ -43,32 +43,58 @@ document.addEventListener("DOMContentLoaded", () => {
   if (submitButton) {
     submitButton.addEventListener("click", async () => {
       const inputs = document.querySelectorAll(".input");
-      const email = document.querySelector(".input-email").value;
-      const selectedBarangay = inputs[3].value;
-
-      if (!selectedBarangay) {
-        showToast("Please select barangay", "error");
+      const email = document.querySelector(".input-email").value.trim();
+      
+      // Define field names for all inputs
+      const fieldNames = [
+        "First Name",
+        "Middle Name",
+        "Last Name",
+        "Barangay",
+        "Age",
+        "Status",
+        "Mobile Number",
+        "Years of Stay",
+        "Purpose",
+        "Student/Patient Name",
+        "Address",
+        "Relationship"
+      ];
+      
+      // Check all fields
+      let hasEmptyFields = false;
+      
+      // Check regular inputs
+      for (let i = 0; i < inputs.length; i++) {
+        if (!inputs[i].value.trim()) {
+          showToast(`Please enter ${fieldNames[i]}`, "error");
+          hasEmptyFields = true;
+          return; // Exit early after first empty field
+        }
+      }
+      
+      // Check email field separately
+      if (!email) {
+        showToast("Please enter your Email", "error");
+        hasEmptyFields = true;
         return;
       }
-      if (!inputs[8].value) {
-        showToast("Please select purpose", "error");
-        return;
-      }
-
+      
+      // If we got here, all fields are filled
       const data = {
         FormName: filename,
-        firstName: inputs[0].value,
-        middleName: inputs[1].value,
-        lastName: inputs[2].value,
-        barangay: selectedBarangay,
-        age: inputs[4].value,
-        status: inputs[5].value,
-        mobileNumber: inputs[6].value,
-        yearsOfStay: inputs[7].value,
-        purpose: inputs[8].value,
-        studentOrPatientName: inputs[9].value,
-        address: inputs[10].value,
-        relationship: inputs[11].value,
+        firstName: inputs[0].value.trim(),
+        middleName: inputs[1].value.trim(),
+        lastName: inputs[2].value.trim(),
+        barangay: inputs[3].value.trim(),
+        age: inputs[4].value.trim(),
+        status: inputs[5].value.trim(),
+        mobileNumber: inputs[6].value.trim(),
+        yearsOfStay: inputs[7].value.trim(),
+        purpose: inputs[8].value.trim(),
+        studentOrPatientName: inputs[9].value.trim(),
+        address: inputs[10].value.trim(),
+        relationship: inputs[11].value.trim(),
         email: email,
         timestamp: new Date(),
       };
@@ -76,10 +102,17 @@ document.addEventListener("DOMContentLoaded", () => {
       try {
         // Save the form data to Firestore
         await addDoc(
-          collection(db, `formSubmissions/${selectedBarangay}/submissions`),
+          collection(db, `formSubmissions/${data.barangay}/submissions`),
           data
         );
         showToast("Form submitted successfully!", "success");
+        
+        // Clear all fields after successful submission
+        inputs.forEach(input => {
+          input.value = "";
+        });
+        document.querySelector(".input-email").value = "";
+        
       } catch (error) {
         console.error("Error saving form", error);
         showToast("Submission failed", "error");

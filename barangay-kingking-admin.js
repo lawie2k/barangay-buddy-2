@@ -25,20 +25,20 @@ import {
 } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
 
 // Function to show snackbar notification
-function showSnackbar(message, type = 'success') {
-  const snackbar = document.createElement('div');
+function showSnackbar(message, type = "success") {
+  const snackbar = document.createElement("div");
   snackbar.className = `snackbar ${type}`;
   snackbar.textContent = message;
   document.body.appendChild(snackbar);
 
   // Add show class after a small delay to trigger animation
   setTimeout(() => {
-    snackbar.classList.add('show');
+    snackbar.classList.add("show");
   }, 100);
 
   // Remove snackbar after 3 seconds
   setTimeout(() => {
-    snackbar.classList.remove('show');
+    snackbar.classList.remove("show");
     setTimeout(() => {
       document.body.removeChild(snackbar);
     }, 300);
@@ -48,17 +48,16 @@ function showSnackbar(message, type = 'success') {
 // Function to send email using EmailJS
 async function sendEmail(email, name) {
   try {
-    const serviceID = "service_qhp2e0j";  // Your service ID
-    const templateID = "template_kdtwkdr";  // Your template ID
-    const publicKey = "8AeJWflF2cbrTW3gA";  // Your public key
+    const serviceID = "service_qhp2e0j";
+    const templateID = "template_kdtwkdr";
+    const publicKey = "8AeJWflF2cbrTW3gA";
 
     const templateParams = {
       to_email: email,
       to_name: name,
-      message: `Hello ${name}, your submission has been received. Thank you!`
+      message: `Hello ${name}, your submission has been received. Thank you!`,
     };
 
-    // Make sure EmailJS is initialized
     emailjs.init(publicKey);
 
     // Send the email
@@ -79,12 +78,10 @@ function showToast(message, type = "success") {
   toast.textContent = message;
   document.body.appendChild(toast);
 
-  // Trigger animation
   setTimeout(() => {
     toast.classList.add("show");
   }, 100);
 
-  // Remove toast after 3 seconds
   setTimeout(() => {
     toast.classList.remove("show");
     setTimeout(() => {
@@ -355,10 +352,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       btn.addEventListener("click", async () => {
         const name = btn.getAttribute("data-name");
         try {
-          // Send the email first
           await sendEmail(email, name);
 
-          // Only update Firestore if email was sent successfully
           await updateDoc(
             doc(db, `formSubmissions/${barangay}/submissions`, docId),
             {
@@ -536,24 +531,32 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     try {
       // Add the new record to Firestore
-      const docRef = await addDoc(collection(db, `residentRecords/${barangay}/records`), {
-        firstname,
-        lastname,
-        address,
-        gender,
-        registeredVoters: registeredVoters === "yes" || registeredVoters === "Yes",
-        timestamp: new Date()
-      });
+      const docRef = await addDoc(
+        collection(db, `residentRecords/${barangay}/records`),
+        {
+          firstname,
+          lastname,
+          address,
+          gender,
+          registeredVoters:
+            registeredVoters === "yes" || registeredVoters === "Yes",
+          timestamp: new Date(),
+        }
+      );
 
       // Create and append the new record to the list immediately
       const recordClone = recordTemplate.content.cloneNode(true);
-      
+
       // Fill in the record data
-      recordClone.querySelector(".record-name").textContent = `${firstname} ${lastname}`;
+      recordClone.querySelector(
+        ".record-name"
+      ).textContent = `${firstname} ${lastname}`;
       recordClone.querySelector(".record-address").textContent = address;
       recordClone.querySelector(".record-gender").textContent = gender;
-      recordClone.querySelector(".record-voter").textContent = registeredVoters === "yes" || registeredVoters === "Yes" ? "Yes" : "No";
-      recordClone.querySelector(".record-date").textContent = new Date().toLocaleString();
+      recordClone.querySelector(".record-voter").textContent =
+        registeredVoters === "yes" || registeredVoters === "Yes" ? "Yes" : "No";
+      recordClone.querySelector(".record-date").textContent =
+        new Date().toLocaleString();
 
       // Add delete functionality
       const deleteButton = recordClone.querySelector(".delete-record");
@@ -561,7 +564,11 @@ document.addEventListener("DOMContentLoaded", async () => {
       deleteButton.addEventListener("click", async () => {
         if (confirm("Are you sure you want to delete this record?")) {
           try {
-            const docRef = doc(db, `residentRecords/${barangay}/records`, docRef.id);
+            const docRef = doc(
+              db,
+              `residentRecords/${barangay}/records`,
+              docRef.id
+            );
             await deleteDoc(docRef);
             deleteButton.closest(".record-item").remove();
             showSnackbar("Record deleted successfully!", "success");
@@ -604,7 +611,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // Load and display existing resident records
   try {
-    const snapshot = await getDocs(collection(db, `residentRecords/${barangay}/records`));
+    const snapshot = await getDocs(
+      collection(db, `residentRecords/${barangay}/records`)
+    );
 
     if (snapshot.empty) {
       residentRecordsContainer.innerHTML = "<p>No resident records found.</p>";
@@ -616,20 +625,29 @@ document.addEventListener("DOMContentLoaded", async () => {
     snapshot.forEach((docSnapshot) => {
       const data = docSnapshot.data();
       const recordClone = recordTemplate.content.cloneNode(true);
-      
+
       // Fill in the record data
-      recordClone.querySelector(".record-name").textContent = `${data.firstname} ${data.lastname}`;
+      recordClone.querySelector(
+        ".record-name"
+      ).textContent = `${data.firstname} ${data.lastname}`;
       recordClone.querySelector(".record-address").textContent = data.address;
       recordClone.querySelector(".record-gender").textContent = data.gender;
-      recordClone.querySelector(".record-voter").textContent = data.registeredVoters ? "Yes" : "No";
-      recordClone.querySelector(".record-date").textContent = new Date(data.timestamp.seconds * 1000).toLocaleString();
-      
+      recordClone.querySelector(".record-voter").textContent =
+        data.registeredVoters ? "Yes" : "No";
+      recordClone.querySelector(".record-date").textContent = new Date(
+        data.timestamp.seconds * 1000
+      ).toLocaleString();
+
       // Add delete functionality
       const deleteButton = recordClone.querySelector(".delete-record");
       deleteButton.addEventListener("click", async () => {
         if (confirm("Are you sure you want to delete this record?")) {
           try {
-            const docRef = doc(db, `residentRecords/${barangay}/records`, docSnapshot.id);
+            const docRef = doc(
+              db,
+              `residentRecords/${barangay}/records`,
+              docSnapshot.id
+            );
             await deleteDoc(docRef);
             deleteButton.closest(".record-item").remove();
             showSnackbar("Record deleted successfully!", "success");
@@ -644,7 +662,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   } catch (error) {
     console.error("Error loading resident records:", error);
-    residentRecordsContainer.innerHTML = "<p>Failed to load resident records.</p>";
+    residentRecordsContainer.innerHTML =
+      "<p>Failed to load resident records.</p>";
   }
 });
 

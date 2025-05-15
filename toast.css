@@ -23,6 +23,14 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 4px;
 }
+
+/* Add styles for error toast */
+#toast.error {
+  background-color: #ff3333; /* Red color for error messages */
+  color: white;
+  box-shadow: 0 4px 8px rgba(255, 0, 0, 0.2);
+}
+
 #toast.show {
   visibility: visible;
   opacity: 1;
